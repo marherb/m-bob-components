@@ -1,0 +1,59 @@
+{
+    "name": "m-bob-components",
+    "version": "0.0.0",
+    "type": "module",
+    "private": "true",
+    "files": [
+        "lib"
+    ],
+    "keywords": [
+        "bobchain",
+        "components",
+        "antd",
+        "react",
+        "vite"
+    ],
+    "main": "./lib/m-bob-components.umd.js",
+    "module": "./lib/m-bob-components.js",
+    "typings": "./lib/m-bob-components.d.ts",
+    "exports": {
+        ".": {
+            "import": "./lib/m-bob-components.js",
+            "require": "./lib/m-bob-components.umd.js"
+        }
+    },
+    "scripts": {
+        "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+        "cosmos": "cosmos",
+        "cosmos-export": "cosmos-export",
+        "preview": "vite preview --config vite.cosmos.ts",
+        "dev": "vite",
+        "build": "tsc && vite build"
+    },
+    "peerDependencies": {
+        "antd": "^5.17.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "vite": "^5.2.0"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@types/react": "^18.2.66",
+        "@types/react-dom": "^18.2.22",
+        "@typescript-eslint/eslint-plugin": "^7.2.0",
+        "@typescript-eslint/parser": "^7.2.0",
+        "@vitejs/plugin-react-swc": "^3.5.0",
+        "antd": "^5.17.0",
+        "eslint": "^8.57.0",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "eslint-plugin-react-refresh": "^0.4.6",
+        "react": "^18.2.0",
+        "react-cosmos": "^6.1.1",
+        "react-cosmos-plugin-vite": "^6.1.1",
+        "react-dom": "^18.2.0",
+        "rollup-plugin-visualizer": "^5.12.0",
+        "typescript": "^5.2.2",
+        "vite": "^5.2.0",
+        "vite-plugin-dts": "^3.9.0"
+    }
+}
