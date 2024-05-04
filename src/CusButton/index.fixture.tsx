@@ -16,6 +16,12 @@ export default () => {
                 <CusButton type="outline">type=outline</CusButton>
                 <CusButton type="text">type=text</CusButton>
             </Space>
+            <Space>
+                <CusButton disabled={true}>disabled</CusButton>
+            </Space>
+            <Space>
+                <CusButton block={true}>block</CusButton>
+            </Space>
         </Space>
     );
 };
