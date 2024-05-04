@@ -1,0 +1,17 @@
+/**遮罩 */
+.ant-modal-root .ant-modal-mask {
+    backdrop-filter: blur(22.5px);
+}
+
+/**背景色 */
+.com-cusmodal-warp .com-cusmodal .ant-modal-content {
+    border-radius: 1.5rem;
+    padding: 0;
+    background-color: #ffffff1f;
+    backdrop-filter: blur(100px);
+}
+
+/**内容框 */
+.com-cusmodal-content {
+    // min-height: 6rem;
+}
