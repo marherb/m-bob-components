@@ -37,7 +37,7 @@ function CusText({
     return (
         <div
             style={{
-                fontSize: fontSize[style],
+                fontSize: fontSize[style] + "rem",
                 lineHeight: lineHeight[style],
                 color: "#FFFFFFE0",
                 textOverflow: "ellipsis",
