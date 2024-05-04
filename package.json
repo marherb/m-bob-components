@@ -1,12 +1,17 @@
 {
     "name": "m-bob-components",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "type": "module",
     "private": "true",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/marherb/m-bob-components"
+    },
     "files": [
         "lib",
         "README.md",
-        "LICENSE"
+        "LICENSE",
+        "package.json"
     ],
     "keywords": [
         "bobchain",
