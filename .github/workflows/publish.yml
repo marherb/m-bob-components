@@ -11,8 +11,6 @@ jobs:
     steps:
     - name: Check out repository
       uses: actions/checkout@v4
-      with:
-        fetch-depth: 2
 
     - name: Use Node.js
       uses: actions/setup-node@v4
@@ -24,13 +22,14 @@ jobs:
     - name: Check package.json version change
       id: check_version
       run: |
-        VERSION_IN_GIT=$(git diff HEAD~ -- package.json | grep -oP '(?<="version": ")[^"]*' || echo "not_found")
+        PACKAGE_NAME=$(node -p "require('./package.json').name")
         CURRENT_VERSION=$(node -p "require('./package.json').version")
-        if [ "$VERSION_IN_GIT" == "$CURRENT_VERSION" ] || [ "$VERSION_IN_GIT" == "not_found" ]; then
-          echo "Version has not changed or unable to find previous version info."
+        NPM_VERSION=$(npm view $PACKAGE_NAME version || echo "0.0.0")
+        if [ "$(printf '%s\n' "$CURRENT_VERSION" "$NPM_VERSION" | sort -V | tail -n1)" != "$CURRENT_VERSION" ] || [ "$NPM_VERSION" == "0.0.0" ]; then
+          echo "Current version is less than or equal to npm version, or package has not been published to npm yet."
           echo "version_changed=false" >> $GITHUB_ENV
         else
-          echo "Version has changed."
+          echo "Current version is greater than npm version."
           echo "version_changed=true" >> $GITHUB_ENV
         fi
 
