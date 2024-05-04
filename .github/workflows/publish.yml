@@ -24,7 +24,11 @@ jobs:
     - name: Check package.json version change
       id: check_version
       run: |
-        VERSION_IN_GIT=$(git diff HEAD~ -- package.json | grep -oP '(?<="version": ")[^"]*')
+        VERSION_IN_GIT=$(git diff HEAD~ -- package.json | grep -oP '(?<="version": ")[^"]*' || :)
+        if [ -z "$VERSION_IN_GIT" ]; then
+          echo "Unable to find previous version info or no previous commit."
+          VERSION_IN_GIT="None"
+        fi
         CURRENT_VERSION=$(node -p "require('./package.json').version")
         if [ "$VERSION_IN_GIT" == "$CURRENT_VERSION" ]; then
           echo "Version has not changed."
