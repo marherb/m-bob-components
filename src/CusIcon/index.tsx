@@ -1,4 +1,4 @@
 import CusComIcon from "./CusComIcon";
-import * as Icons from "./Icons";
+import Icons from "./Icons";
 
 export { CusComIcon, Icons };

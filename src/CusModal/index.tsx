@@ -3,7 +3,7 @@ import { Modal, ModalProps, Spin } from "antd";
 
 /**自定义modal框
  */
-export function CusModal(props: {
+export default function CusModal(props: {
     open?: boolean;
     onCancel?: () => void;
     loading?: boolean; //内容是否使用loading包裹

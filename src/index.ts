@@ -1,11 +1,11 @@
-import * as CusButton from "./CusButton";
+import CusButton from "./CusButton";
 import * as CusIcon from "./CusIcon";
-import * as CusInput from "./CusInput";
-import * as CusListSelect from "./CusListSelect";
-import * as CusMenu from "./CusMenu";
-import * as CusModal from "./CusModal";
-import * as CusText from "./CusText";
-import * as CusTooltip from "./CusTooltip";
+import CusInput from "./CusInput";
+import CusListSelect from "./CusListSelect";
+import CusMenu from "./CusMenu";
+import CusModal from "./CusModal";
+import CusText from "./CusText";
+import CusTooltip from "./CusTooltip";
 
 export {
     CusButton,

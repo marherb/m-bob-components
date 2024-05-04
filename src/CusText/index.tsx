@@ -1,5 +1,3 @@
-import React, { memo } from "react";
-
 //字体大小 单位rem
 const fontSize = {
     b1: 1,
@@ -25,7 +23,7 @@ const fontWeights = {
     bold: 700,
 };
 
-function CusText({
+export default function CusText({
     children,
     style = "b1",
     outline = "regular",
@@ -51,4 +49,3 @@ function CusText({
         </div>
     );
 }
-export default memo(CusText);

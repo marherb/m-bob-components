@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { useHover } from "ahooks";
 import { borderRadius, fontSizes, lineHeights, paddings } from "../config";
 import {
@@ -10,7 +10,7 @@ import {
 } from "./buttonConfig";
 import CusComIcon, { CusComIconType } from "../CusIcon/CusComIcon";
 
-function CusButton({
+export default function CusButton({
     children,
     size = "m",
     type = "solid",
@@ -83,4 +83,3 @@ function CusButton({
         </Button>
     );
 }
-export default React.memo(CusButton);
