@@ -1,4 +1,4 @@
-import { MouseEventHandler, memo, useRef } from "react";
+import { MouseEventHandler, useRef } from "react";
 import { useHover } from "ahooks";
 import { Button } from "antd";
 import { borderRadius, paddings } from "../config";
@@ -6,7 +6,7 @@ import { backgrounds, borderColors, borderColorsOnHover } from "./buttonConfig";
 import CusComIcon, { CusComIconType } from "../CusIcon/CusComIcon";
 
 /**图标按钮 */
-function CusIconButton({
+export default function CusIconButton({
     icon,
     onClick,
     size = "m",
@@ -52,9 +52,11 @@ function CusIconButton({
                 control={isHovering}
                 size={size}
                 animation="rotate"
+                style={{
+                    cursor: "pointer",
+                }}
                 {...icon}
             />
         </Button>
     );
 }
-export default memo(CusIconButton);
