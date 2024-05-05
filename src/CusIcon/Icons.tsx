@@ -1,9 +1,12 @@
 import Icon from "@ant-design/icons";
 
 /**自定义图标 */
+export default {
+    CloseIcon,
+};
 
 /**Modal框 关闭按钮 */
-export function CloseIcon() {
+function CloseIcon() {
     return (
         <Icon
             component={() => (
