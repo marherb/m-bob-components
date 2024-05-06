@@ -12,7 +12,7 @@ export default function CusModal(props: {
     title?: string | null; //标题
     icon?: string; //图标
     iconClick?: () => void; //图标点击事件
-    modalProps?: ModalProps;
+    originProps?: ModalProps;
 }) {
     return (
         <Modal
@@ -25,7 +25,7 @@ export default function CusModal(props: {
             maskClosable={!props.loading}
             open={props.open}
             onCancel={props.onCancel}
-            {...(props.modalProps || {})}
+            {...(props.originProps || {})}
         >
             <Spin spinning={props.loading || false} tip={props.loadingText}>
                 <div className="com-cusmodal-content">{props.children}</div>

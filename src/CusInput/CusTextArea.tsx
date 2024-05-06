@@ -1,3 +1,4 @@
+import { TextAreaProps } from "antd/es/input";
 import { borderRadius, fontSizes, lineHeights, paddings } from "../config";
 import { Input } from "antd";
 
@@ -5,10 +6,12 @@ export default function CusTextArea({
     size = "m",
     placeholder,
     style = {},
+    originProps = {},
 }: {
     size?: "el" | "l" | "m" | "s" | "es"; //Extra Large， Large， Medium。 Small。 Extra Small
     placeholder?: string;
     style?: React.CSSProperties;
+    originProps?: TextAreaProps;
 }) {
     return (
         <Input.TextArea
@@ -25,6 +28,7 @@ export default function CusTextArea({
             }}
             placeholder={placeholder}
             rows={3}
+            {...originProps}
         />
     );
 }

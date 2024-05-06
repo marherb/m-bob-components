@@ -1,6 +1,6 @@
 {
     "name": "@marherb-work/m-bob-components",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "type": "module",
     "repository": {
         "type": "git",
@@ -23,6 +23,7 @@
     "main": "./lib/m-bob-components.umd.js",
     "module": "./lib/m-bob-components.js",
     "typings": "./lib/m-bob-components.d.ts",
+    "style": "./lib/style.css",
     "exports": {
         ".": {
             "import": "./lib/m-bob-components.js",

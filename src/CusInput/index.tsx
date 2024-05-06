@@ -1,4 +1,4 @@
-import { Input } from "antd";
+import { Input, InputProps } from "antd";
 import { borderRadius, fontSizes, lineHeights, paddings } from "../config";
 import { useRef } from "react";
 import { useHover } from "ahooks";
@@ -22,6 +22,7 @@ export default function CusInput({
     leftIcon,
     rightIcon,
     state = "default",
+    originProps = {},
 }: {
     size?: "el" | "l" | "m";
     placeholder?: string;
@@ -34,6 +35,7 @@ export default function CusInput({
     leftIcon?: CusComIconType; //左侧图标
     rightIcon?: CusComIconType; //右侧图标
     state?: "default" | "success" | "warning" | "error"; //组件状态 默认|成功|警告|错误
+    originProps?: InputProps;
 }) {
     const ref = useRef(null);
     const isHovering = useHover(ref);
@@ -135,6 +137,7 @@ export default function CusInput({
                     ...inputStyle,
                 }}
                 placeholder={placeholder}
+                {...originProps}
             />
             {!!rightIcon && (
                 <CusComIcon

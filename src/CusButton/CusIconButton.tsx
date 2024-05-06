@@ -1,6 +1,6 @@
 import { MouseEventHandler, useRef } from "react";
 import { useHover } from "ahooks";
-import { Button } from "antd";
+import { Button, ButtonProps } from "antd";
 import { borderRadius, paddings } from "../config";
 import { backgrounds, borderColors, borderColorsOnHover } from "./buttonConfig";
 import CusComIcon, { CusComIconType } from "../CusIcon/CusComIcon";
@@ -14,6 +14,7 @@ export default function CusIconButton({
     disabled,
     style = {},
     importantClassName,
+    originProps = {},
 }: {
     icon: CusComIconType; //图标
     onClick?: MouseEventHandler<HTMLElement>;
@@ -22,6 +23,7 @@ export default function CusIconButton({
     disabled?: boolean;
     style?: React.CSSProperties;
     importantClassName?: string; //临时覆盖样式
+    originProps?: ButtonProps; //原始组件参数
 }) {
     const ref = useRef(null);
     const isHovering = useHover(ref);
@@ -47,6 +49,7 @@ export default function CusIconButton({
             className={importantClassName}
             disabled={disabled}
             onClick={onClick}
+            {...originProps}
         >
             <CusComIcon
                 control={isHovering}

@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button, ButtonProps } from "antd";
 import { useRef } from "react";
 import { useHover } from "ahooks";
 import { borderRadius, fontSizes, lineHeights, paddings } from "../config";
@@ -21,6 +21,7 @@ export default function CusButton({
     importantClassName,
     leftIcon,
     rightIcon,
+    originProps = {},
 }: {
     children: React.ReactNode;
     size?: "el" | "l" | "m" | "s" | "es"; //Extra Large， Large， Medium。 Small。 Extra Small
@@ -32,6 +33,7 @@ export default function CusButton({
     importantClassName?: string; //临时覆盖样式
     leftIcon?: CusComIconType; //左侧图标
     rightIcon?: CusComIconType; //右侧图标
+    originProps?: ButtonProps; //原始组件参数
 }) {
     const ref = useRef(null);
     const isHovering = useHover(ref);
@@ -62,6 +64,7 @@ export default function CusButton({
             disabled={disabled}
             block={block}
             onClick={onClick}
+            {...originProps}
         >
             {!!leftIcon && (
                 <CusComIcon
