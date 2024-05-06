@@ -167,7 +167,8 @@ function CusIconButton({
   type = "solid",
   disabled,
   style = {},
-  importantClassName
+  importantClassName,
+  originProps = {}
 }) {
   const ref = reactExports.useRef(null);
   const isHovering = useHover(ref);
@@ -191,6 +192,7 @@ function CusIconButton({
       className: importantClassName,
       disabled,
       onClick,
+      ...originProps,
       children: /* @__PURE__ */ jsxRuntimeExports.jsx(
         CusComIcon,
         {
@@ -286,7 +288,7 @@ function CusModal(props) {
       maskClosable: !props.loading,
       open: props.open,
       onCancel: props.onCancel,
-      ...props.modalProps || {},
+      ...props.originProps || {},
       children: /* @__PURE__ */ jsxRuntimeExports.jsx(Spin, { spinning: props.loading || false, tip: props.loadingText, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "com-cusmodal-content", children: props.children }) })
     }
   );
@@ -301,7 +303,8 @@ function CusButton({
   onClick,
   importantClassName,
   leftIcon,
-  rightIcon
+  rightIcon,
+  originProps = {}
 }) {
   const ref = reactExports.useRef(null);
   const isHovering = useHover(ref);
@@ -330,6 +333,7 @@ function CusButton({
       disabled,
       block,
       onClick,
+      ...originProps,
       children: [
         !!leftIcon && /* @__PURE__ */ jsxRuntimeExports.jsx(
           CusComIcon,
@@ -530,7 +534,8 @@ function CusInput({
   type = "text",
   leftIcon,
   rightIcon,
-  state = "default"
+  state = "default",
+  originProps = {}
 }) {
   const ref = reactExports.useRef(null);
   const isHovering = useHover(ref);
@@ -637,7 +642,8 @@ function CusInput({
               border: "none",
               ...inputStyle
             },
-            placeholder
+            placeholder,
+            ...originProps
           }
         ),
         !!rightIcon && /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -656,7 +662,8 @@ function CusInput({
 function CusTextArea({
   size = "m",
   placeholder,
-  style = {}
+  style = {},
+  originProps = {}
 }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     Input.TextArea,
@@ -673,7 +680,8 @@ function CusTextArea({
         ...style
       },
       placeholder,
-      rows: 3
+      rows: 3,
+      ...originProps
     }
   );
 }
