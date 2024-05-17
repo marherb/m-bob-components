@@ -57,7 +57,7 @@ export default function CusButton({
                 lineHeight: `${lineHeights[size]}rem`,
                 background: backgrounds[type],
                 color: color[type],
-                filter: !!disabled ? "brightness(0.6)" : "none",
+                filter: disabled ? "brightness(0.6)" : "none",
                 ...style,
             }}
             className={importantClassName}

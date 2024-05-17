@@ -2,38 +2,22 @@ import { Space } from "antd";
 import CusModal from ".";
 import CusButton from "../CusButton";
 import { useBoolean } from "ahooks";
-import { useEffect } from "react";
 
-export default function () {
+export default function CusModalFixture() {
     const [open, setOpen] = useBoolean(false);
-    const [loading, setLoading] = useBoolean(false);
-
-    useEffect(() => {
-        if (loading) {
-            setTimeout(() => {
-                setLoading.setFalse();
-            }, 1000);
-        }
-    }, [loading]);
 
     return (
         <Space>
             <CusButton onClick={setOpen.setTrue}>modal</CusButton>
-            <CusModal
-                open={open}
-                onCancel={() => {
-                    setOpen.setFalse();
-                    setLoading.setFalse();
-                }}
-                loading={loading}
-            >
-                <Space
+            <CusModal open={open} onCancel={setOpen.setFalse}>
+                <div
                     style={{
-                        padding: "1rem",
+                        padding: 32,
+                        color: "#fff",
                     }}
                 >
-                    <CusButton onClick={setLoading.setTrue}>loading</CusButton>
-                </Space>
+                    Modal Component
+                </div>
             </CusModal>
         </Space>
     );

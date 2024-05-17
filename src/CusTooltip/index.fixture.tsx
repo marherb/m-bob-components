@@ -1,15 +1,12 @@
-import { Space, Tooltip } from "antd";
-import TestPng from "../assets/test.png";
-import CusIconButton from "../CusButton/CusIconButton";
+import { Space, Typography } from "antd";
+import CusTooltip from ".";
 
-export default function () {
-    return (
-        <Space>
-            <Tooltip title="title">
-                <div>
-                    <CusIconButton icon={{ src: TestPng }} />
-                </div>
-            </Tooltip>
-        </Space>
-    );
-}
+export default (
+    <Space>
+        <CusTooltip title="Lorem ipsum dolor." open={true}>
+            <Typography.Title style={{ color: "white" }}>
+                tooltip
+            </Typography.Title>
+        </CusTooltip>
+    </Space>
+);

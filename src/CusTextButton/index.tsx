@@ -1,3 +1,6 @@
+import { useHover } from "ahooks";
+import { useRef } from "react";
+
 //字体大小 单位rem
 const fontSize = {
     b1: 1,
@@ -7,13 +10,6 @@ const fontSize = {
 const lineHeight = {
     b1: 1.5,
     b2: 1.375,
-};
-//字体 需要自定义
-const fontFamilys = {
-    regular: "Cus-Regular",
-    medium: "Cus-Medium",
-    semibold: "Cus-SemiBold",
-    bold: "Cus-Bold",
 };
 //字重
 const fontWeights = {
@@ -25,27 +21,35 @@ const fontWeights = {
 
 export default function CusText({
     children,
-    style = "b1",
+    style = {},
+    size = "b1",
     outline = "regular",
 }: {
     children: React.ReactNode;
-    style?: "b1" | "b2";
+    style?: React.CSSProperties;
+    size?: "b1" | "b2";
     outline?: "regular" | "medium" | "semibold" | "bold";
 }) {
+    const ref = useRef(null);
+    const isHovering = useHover(ref);
+
     return (
-        <div
+        <span
+            ref={ref}
             style={{
-                fontSize: fontSize[style] + "rem",
-                lineHeight: lineHeight[style],
+                fontSize: fontSize[size] + "rem",
+                lineHeight: lineHeight[size],
                 color: "#FFFFFFE0",
                 textOverflow: "ellipsis",
                 overflow: "hidden",
                 fontStyle: "normal",
-                fontFamily: fontFamilys[outline],
                 fontWeight: fontWeights[outline],
+                textDecoration: isHovering ? "underline" : "none",
+                cursor: "pointer",
+                ...style,
             }}
         >
             {children}
-        </div>
+        </span>
     );
 }

@@ -4,7 +4,7 @@ import CusInput from "./CusInput";
 import CusListSelect from "./CusListSelect";
 import CusMenu from "./CusMenu";
 import CusModal from "./CusModal";
-import CusText from "./CusText";
+import CusTextButton from "./CusTextButton";
 import CusTooltip from "./CusTooltip";
 
 export {
@@ -14,6 +14,6 @@ export {
     CusListSelect,
     CusMenu,
     CusModal,
-    CusText,
+    CusTextButton,
     CusTooltip,
 };
