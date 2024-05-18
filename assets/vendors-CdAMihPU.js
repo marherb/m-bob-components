@@ -10518,7 +10518,7 @@ var requestAnimationFrame$1 = function() {
   };
 }();
 var trailingTimeout = 2;
-function throttle$1(callback, delay) {
+function throttle(callback, delay) {
   var leadingCall = false, trailingCall = false, lastCallTime = 0;
   function resolvePending() {
     if (leadingCall) {
@@ -10560,7 +10560,7 @@ var ResizeObserverController = (
       this.mutationsObserver_ = null;
       this.observers_ = [];
       this.onTransitionEnd_ = this.onTransitionEnd_.bind(this);
-      this.refresh = throttle$1(this.refresh.bind(this), REFRESH_DELAY);
+      this.refresh = throttle(this.refresh.bind(this), REFRESH_DELAY);
     }
     ResizeObserverController2.prototype.addObserver = function(observer) {
       if (!~this.observers_.indexOf(observer)) {
@@ -14258,6 +14258,7 @@ Object.keys(presetPrimaryColors).forEach(function(key) {
   });
   presetDarkPalettes[key].primary = presetDarkPalettes[key][5];
 });
+var gold = presetPalettes.gold;
 var blue = presetPalettes.blue;
 const defaultPresetColors = {
   blue: "#1677ff",
@@ -14758,7 +14759,7 @@ function getAlphaColor(frontColor, backgroundColor) {
     a: 1
   }).toRgbString();
 }
-var __rest$k = function(s, e2) {
+var __rest$p = function(s, e2) {
   var t2 = {};
   for (var p2 in s)
     if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
@@ -14773,7 +14774,7 @@ var __rest$k = function(s, e2) {
 function formatToken(derivativeToken) {
   const {
     override
-  } = derivativeToken, restToken = __rest$k(derivativeToken, ["override"]);
+  } = derivativeToken, restToken = __rest$p(derivativeToken, ["override"]);
   const overrideTokens = Object.assign({}, override);
   Object.keys(seedToken).forEach((token2) => {
     delete overrideTokens[token2];
@@ -14927,7 +14928,7 @@ function formatToken(derivativeToken) {
   }), overrideTokens);
   return aliasToken;
 }
-var __rest$j = function(s, e2) {
+var __rest$o = function(s, e2) {
   var t2 = {};
   for (var p2 in s)
     if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
@@ -14991,7 +14992,7 @@ const getComputedToken = (originToken, overrideToken, theme) => {
   const derivativeToken = theme.getDerivativeToken(originToken);
   const {
     override
-  } = overrideToken, components = __rest$j(overrideToken, ["override"]);
+  } = overrideToken, components = __rest$o(overrideToken, ["override"]);
   let mergedDerivativeToken = Object.assign(Object.assign({}, derivativeToken), {
     override
   });
@@ -15001,7 +15002,7 @@ const getComputedToken = (originToken, overrideToken, theme) => {
       let [key, value] = _ref;
       const {
         theme: componentTheme
-      } = value, componentTokens = __rest$j(value, ["theme"]);
+      } = value, componentTokens = __rest$o(value, ["theme"]);
       let mergedComponentToken = componentTokens;
       if (componentTheme) {
         mergedComponentToken = getComputedToken(Object.assign(Object.assign({}, mergedDerivativeToken), componentTokens), {
@@ -15268,6 +15269,21 @@ function useMergedState(defaultStateValue, option) {
   });
   return [postMergedValue, triggerChange];
 }
+const operationUnit = (token2) => ({
+  // FIXME: This use link but is a operation unit. Seems should be a colorPrimary.
+  // And Typography use this to generate link style which should not do this.
+  color: token2.colorLink,
+  textDecoration: "none",
+  outline: "none",
+  cursor: "pointer",
+  transition: `color ${token2.motionDurationSlow}`,
+  "&:focus, &:hover": {
+    color: token2.colorLinkHover
+  },
+  "&:active": {
+    color: token2.colorLinkActive
+  }
+});
 const resetComponent = function(token2) {
   let needInheritFontFamily = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : false;
   return {
@@ -16347,7 +16363,7 @@ function MotionWrapper(props) {
   return children;
 }
 const PropWarning = () => null;
-var __rest$i = function(s, e2) {
+var __rest$n = function(s, e2) {
   var t2 = {};
   for (var p2 in s)
     if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
@@ -16635,7 +16651,7 @@ const ProviderChildren = (props) => {
       token: token2,
       components,
       cssVar
-    } = _a, rest = __rest$i(_a, ["algorithm", "token", "components", "cssVar"]);
+    } = _a, rest = __rest$n(_a, ["algorithm", "token", "components", "cssVar"]);
     const themeObj = algorithm && (!Array.isArray(algorithm) || algorithm.length > 0) ? createTheme(algorithm) : defaultTheme;
     const parsedComponents = {};
     Object.entries(components || {}).forEach((_ref) => {
@@ -16881,7 +16897,7 @@ var CheckCircleFilled = function CheckCircleFilled2(props, ref) {
     icon: CheckCircleFilled$1
   }));
 };
-var RefIcon$9 = /* @__PURE__ */ reactExports.forwardRef(CheckCircleFilled);
+var RefIcon$c = /* @__PURE__ */ reactExports.forwardRef(CheckCircleFilled);
 var CloseCircleFilled$1 = { "icon": { "tag": "svg", "attrs": { "fill-rule": "evenodd", "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z" } }] }, "name": "close-circle", "theme": "filled" };
 var CloseCircleFilled = function CloseCircleFilled2(props, ref) {
   return /* @__PURE__ */ reactExports.createElement(Icon, _extends({}, props, {
@@ -16889,7 +16905,7 @@ var CloseCircleFilled = function CloseCircleFilled2(props, ref) {
     icon: CloseCircleFilled$1
   }));
 };
-var RefIcon$8 = /* @__PURE__ */ reactExports.forwardRef(CloseCircleFilled);
+var RefIcon$b = /* @__PURE__ */ reactExports.forwardRef(CloseCircleFilled);
 var CloseOutlined$1 = { "icon": { "tag": "svg", "attrs": { "fill-rule": "evenodd", "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z" } }] }, "name": "close", "theme": "outlined" };
 var CloseOutlined = function CloseOutlined2(props, ref) {
   return /* @__PURE__ */ reactExports.createElement(Icon, _extends({}, props, {
@@ -16897,7 +16913,7 @@ var CloseOutlined = function CloseOutlined2(props, ref) {
     icon: CloseOutlined$1
   }));
 };
-var RefIcon$7 = /* @__PURE__ */ reactExports.forwardRef(CloseOutlined);
+var RefIcon$a = /* @__PURE__ */ reactExports.forwardRef(CloseOutlined);
 var ExclamationCircleFilled$1 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z" } }] }, "name": "exclamation-circle", "theme": "filled" };
 var ExclamationCircleFilled = function ExclamationCircleFilled2(props, ref) {
   return /* @__PURE__ */ reactExports.createElement(Icon, _extends({}, props, {
@@ -16905,7 +16921,7 @@ var ExclamationCircleFilled = function ExclamationCircleFilled2(props, ref) {
     icon: ExclamationCircleFilled$1
   }));
 };
-var RefIcon$6 = /* @__PURE__ */ reactExports.forwardRef(ExclamationCircleFilled);
+var RefIcon$9 = /* @__PURE__ */ reactExports.forwardRef(ExclamationCircleFilled);
 var InfoCircleFilled$1 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm32 664c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V456c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272zm-32-344a48.01 48.01 0 010-96 48.01 48.01 0 010 96z" } }] }, "name": "info-circle", "theme": "filled" };
 var InfoCircleFilled = function InfoCircleFilled2(props, ref) {
   return /* @__PURE__ */ reactExports.createElement(Icon, _extends({}, props, {
@@ -16913,7 +16929,7 @@ var InfoCircleFilled = function InfoCircleFilled2(props, ref) {
     icon: InfoCircleFilled$1
   }));
 };
-var RefIcon$5 = /* @__PURE__ */ reactExports.forwardRef(InfoCircleFilled);
+var RefIcon$8 = /* @__PURE__ */ reactExports.forwardRef(InfoCircleFilled);
 var attributes = "accept acceptCharset accessKey action allowFullScreen allowTransparency\n    alt async autoComplete autoFocus autoPlay capture cellPadding cellSpacing challenge\n    charSet checked classID className colSpan cols content contentEditable contextMenu\n    controls coords crossOrigin data dateTime default defer dir disabled download draggable\n    encType form formAction formEncType formMethod formNoValidate formTarget frameBorder\n    headers height hidden high href hrefLang htmlFor httpEquiv icon id inputMode integrity\n    is keyParams keyType kind label lang list loop low manifest marginHeight marginWidth max maxLength media\n    mediaGroup method min minLength multiple muted name noValidate nonce open\n    optimum pattern placeholder poster preload radioGroup readOnly rel required\n    reversed role rowSpan rows sandbox scope scoped scrolling seamless selected\n    shape size sizes span spellCheck src srcDoc srcLang srcSet start step style\n    summary tabIndex target title type useMap value width wmode wrap";
 var eventsName = "onCopy onCut onPaste onCompositionEnd onCompositionStart onCompositionUpdate onKeyDown\n    onKeyPress onKeyUp onFocus onBlur onChange onInput onSubmit onClick onContextMenu onDoubleClick\n    onDrag onDragEnd onDragEnter onDragExit onDragLeave onDragOver onDragStart onDrop onMouseDown\n    onMouseEnter onMouseLeave onMouseMove onMouseOut onMouseOver onMouseUp onSelect onTouchCancel\n    onTouchEnd onTouchMove onTouchStart onScroll onWheel onAbort onCanPlay onCanPlayThrough\n    onDurationChange onEmptied onEncrypted onEnded onError onLoadedData onLoadedMetadata\n    onLoadStart onPause onPlay onPlaying onProgress onRateChange onSeeked onSeeking onStalled onSuspend onTimeUpdate onVolumeChange onWaiting onLoad onError";
 var propList = "".concat(attributes, " ").concat(eventsName).split(/[\s\n]+/);
@@ -17499,7 +17515,7 @@ var LoadingOutlined = function LoadingOutlined2(props, ref) {
     icon: LoadingOutlined$1
   }));
 };
-var RefIcon$4 = /* @__PURE__ */ reactExports.forwardRef(LoadingOutlined);
+var RefIcon$7 = /* @__PURE__ */ reactExports.forwardRef(LoadingOutlined);
 const zIndexContext = /* @__PURE__ */ React.createContext(void 0);
 const CONTAINER_OFFSET = 100;
 const CONTAINER_OFFSET_MAX_COUNT = 10;
@@ -18352,7 +18368,7 @@ const useStyle$7 = genStyleHooks("Space", (token2) => {
   // https://github.com/ant-design/ant-design/issues/40315
   resetStyle: false
 });
-var __rest$h = function(s, e2) {
+var __rest$m = function(s, e2) {
   var t2 = {};
   for (var p2 in s)
     if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
@@ -18400,7 +18416,7 @@ const NoCompactStyle = (_ref) => {
 const CompactItem = (_a) => {
   var {
     children
-  } = _a, otherProps = __rest$h(_a, ["children"]);
+  } = _a, otherProps = __rest$m(_a, ["children"]);
   return /* @__PURE__ */ reactExports.createElement(SpaceCompactItemContext.Provider, {
     value: otherProps
   }, children);
@@ -18418,7 +18434,7 @@ const Compact = (props) => {
     className,
     rootClassName,
     children
-  } = props, restProps = __rest$h(props, ["size", "direction", "block", "prefixCls", "className", "rootClassName", "children"]);
+  } = props, restProps = __rest$m(props, ["size", "direction", "block", "prefixCls", "className", "rootClassName", "children"]);
   const mergedSize = useSize((ctx) => size !== null && size !== void 0 ? size : ctx);
   const prefixCls = getPrefixCls("space-compact", customizePrefixCls);
   const [wrapCSSVar, hashId] = useStyle$7(prefixCls);
@@ -18446,7 +18462,7 @@ const Compact = (props) => {
     className: clx
   }, restProps), nodes));
 };
-var __rest$g = function(s, e2) {
+var __rest$l = function(s, e2) {
   var t2 = {};
   for (var p2 in s)
     if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
@@ -18468,7 +18484,7 @@ const ButtonGroup = (props) => {
     prefixCls: customizePrefixCls,
     size,
     className
-  } = props, others = __rest$g(props, ["prefixCls", "size", "className"]);
+  } = props, others = __rest$l(props, ["prefixCls", "size", "className"]);
   const prefixCls = getPrefixCls("btn-group", customizePrefixCls);
   const [, , hashId] = useToken();
   let sizeCls = "";
@@ -18574,7 +18590,7 @@ const InnerLoadingIcon = /* @__PURE__ */ reactExports.forwardRef((props, ref) =>
     className: mergedIconCls,
     style: style2,
     ref
-  }, /* @__PURE__ */ React.createElement(RefIcon$4, {
+  }, /* @__PURE__ */ React.createElement(RefIcon$7, {
     className: iconClassName
   }));
 });
@@ -19267,7 +19283,7 @@ const CompactCmp = genSubStyleComponent(["Button", "compact"], (token2) => {
     genButtonCompactStyle(buttonToken)
   ];
 }, prepareComponentToken$4);
-var __rest$f = function(s, e2) {
+var __rest$k = function(s, e2) {
   var t2 = {};
   for (var p2 in s)
     if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
@@ -19316,7 +19332,7 @@ const InternalCompoundedButton = /* @__PURE__ */ React.forwardRef((props, ref) =
     classNames: customClassNames,
     style: customStyle = {},
     autoInsertSpace
-  } = props, rest = __rest$f(props, ["loading", "prefixCls", "type", "danger", "shape", "size", "styles", "disabled", "className", "rootClassName", "children", "icon", "iconPosition", "ghost", "block", "htmlType", "classNames", "style", "autoInsertSpace"]);
+  } = props, rest = __rest$k(props, ["loading", "prefixCls", "type", "danger", "shape", "size", "styles", "disabled", "className", "rootClassName", "children", "icon", "iconPosition", "ghost", "block", "htmlType", "classNames", "style", "autoInsertSpace"]);
   const mergedType = type4 || "default";
   const {
     getPrefixCls,
@@ -20233,7 +20249,7 @@ function useClosable(propCloseCollection, contextCloseCollection) {
   const propCloseConfig = useClosableConfig(propCloseCollection);
   const contextCloseConfig = useClosableConfig(contextCloseCollection);
   const mergedFallbackCloseCollection = React.useMemo(() => Object.assign({
-    closeIcon: /* @__PURE__ */ React.createElement(RefIcon$7, null)
+    closeIcon: /* @__PURE__ */ React.createElement(RefIcon$a, null)
   }, fallbackCloseCollection), [fallbackCloseCollection]);
   const mergedClosableConfig = React.useMemo(() => {
     if (propCloseConfig === false) {
@@ -20272,6 +20288,31 @@ function useClosable(propCloseCollection, contextCloseCollection) {
     }
     return [true, mergedCloseIcon];
   }, [mergedClosableConfig, mergedFallbackCloseCollection]);
+}
+var isStyleNameSupport = function isStyleNameSupport2(styleName) {
+  if (canUseDom() && window.document.documentElement) {
+    var styleNameList = Array.isArray(styleName) ? styleName : [styleName];
+    var documentElement = window.document.documentElement;
+    return styleNameList.some(function(name) {
+      return name in documentElement.style;
+    });
+  }
+  return false;
+};
+var isStyleValueSupport = function isStyleValueSupport2(styleName, value) {
+  if (!isStyleNameSupport(styleName)) {
+    return false;
+  }
+  var ele = document.createElement("div");
+  var origin = ele.style[styleName];
+  ele.style[styleName] = value;
+  return ele.style[styleName] !== origin;
+};
+function isStyleSupport(styleName, styleValue) {
+  if (!Array.isArray(styleName) && styleValue !== void 0) {
+    return isStyleValueSupport(styleName, styleValue);
+  }
+  return isStyleNameSupport(styleName);
 }
 const canUseDocElement = () => canUseDom() && window.document.documentElement;
 var HOOK_MARK = "RC_FORM_INTERNAL_HOOKS";
@@ -20446,7 +20487,7 @@ function convertFieldsError(errors) {
   });
   return fields;
 }
-function format(template) {
+function format$1(template) {
   for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
     args[_key - 1] = arguments[_key];
   }
@@ -20652,7 +20693,7 @@ var ENUM$1 = "enum";
 var enumerable$1 = function enumerable(rule, value, source, errors, options) {
   rule[ENUM$1] = Array.isArray(rule[ENUM$1]) ? rule[ENUM$1] : [];
   if (rule[ENUM$1].indexOf(value) === -1) {
-    errors.push(format(options.messages[ENUM$1], rule.fullField, rule[ENUM$1].join(", ")));
+    errors.push(format$1(options.messages[ENUM$1], rule.fullField, rule[ENUM$1].join(", ")));
   }
 };
 var pattern$2 = function pattern(rule, value, source, errors, options) {
@@ -20660,12 +20701,12 @@ var pattern$2 = function pattern(rule, value, source, errors, options) {
     if (rule.pattern instanceof RegExp) {
       rule.pattern.lastIndex = 0;
       if (!rule.pattern.test(value)) {
-        errors.push(format(options.messages.pattern.mismatch, rule.fullField, value, rule.pattern));
+        errors.push(format$1(options.messages.pattern.mismatch, rule.fullField, value, rule.pattern));
       }
     } else if (typeof rule.pattern === "string") {
       var _pattern = new RegExp(rule.pattern);
       if (!_pattern.test(value)) {
-        errors.push(format(options.messages.pattern.mismatch, rule.fullField, value, rule.pattern));
+        errors.push(format$1(options.messages.pattern.mismatch, rule.fullField, value, rule.pattern));
       }
     }
   }
@@ -20698,19 +20739,19 @@ var range = function range2(rule, value, source, errors, options) {
   }
   if (len) {
     if (val !== rule.len) {
-      errors.push(format(options.messages[key].len, rule.fullField, rule.len));
+      errors.push(format$1(options.messages[key].len, rule.fullField, rule.len));
     }
   } else if (min && !max && val < rule.min) {
-    errors.push(format(options.messages[key].min, rule.fullField, rule.min));
+    errors.push(format$1(options.messages[key].min, rule.fullField, rule.min));
   } else if (max && !min && val > rule.max) {
-    errors.push(format(options.messages[key].max, rule.fullField, rule.max));
+    errors.push(format$1(options.messages[key].max, rule.fullField, rule.max));
   } else if (min && max && (val < rule.min || val > rule.max)) {
-    errors.push(format(options.messages[key].range, rule.fullField, rule.min, rule.max));
+    errors.push(format$1(options.messages[key].range, rule.fullField, rule.min, rule.max));
   }
 };
 var required$1 = function required(rule, value, source, errors, options, type4) {
   if (rule.required && (!source.hasOwnProperty(rule.field) || isEmptyValue(value, type4 || rule.type))) {
-    errors.push(format(options.messages.required, rule.fullField));
+    errors.push(format$1(options.messages.required, rule.fullField));
   }
 };
 var urlReg;
@@ -20813,15 +20854,15 @@ var type$1 = function type(rule, value, source, errors, options) {
   var ruleType = rule.type;
   if (custom.indexOf(ruleType) > -1) {
     if (!types[ruleType](value)) {
-      errors.push(format(options.messages.types[ruleType], rule.fullField, rule.type));
+      errors.push(format$1(options.messages.types[ruleType], rule.fullField, rule.type));
     }
   } else if (ruleType && _typeof(value) !== rule.type) {
-    errors.push(format(options.messages.types[ruleType], rule.fullField, rule.type));
+    errors.push(format$1(options.messages.types[ruleType], rule.fullField, rule.type));
   }
 };
 var whitespace = function whitespace2(rule, value, source, errors, options) {
   if (/^\s+$/.test(value) || value === "") {
-    errors.push(format(options.messages.whitespace, rule.fullField));
+    errors.push(format$1(options.messages.whitespace, rule.fullField));
   }
 };
 const rules = {
@@ -21226,7 +21267,7 @@ var Schema = /* @__PURE__ */ function() {
               if (rule.message !== void 0) {
                 filledErrors = [].concat(rule.message).map(complementError(rule, source));
               } else if (options.error) {
-                filledErrors = [options.error(rule, format(options.messages.required, rule.field))];
+                filledErrors = [options.error(rule, format$1(options.messages.required, rule.field))];
               }
               return doIt(filledErrors);
             }
@@ -21305,7 +21346,7 @@ var Schema = /* @__PURE__ */ function() {
         rule.type = "pattern";
       }
       if (typeof rule.validator !== "function" && rule.type && !validators.hasOwnProperty(rule.type)) {
-        throw new Error(format("Unknown rule type %s", rule.type));
+        throw new Error(format$1("Unknown rule type %s", rule.type));
       }
       return rule.type || "string";
     }
@@ -23398,7 +23439,7 @@ const NormalOkBtn = () => {
 function renderCloseIcon(prefixCls, closeIcon) {
   return /* @__PURE__ */ React.createElement("span", {
     className: `${prefixCls}-close-x`
-  }, closeIcon || /* @__PURE__ */ React.createElement(RefIcon$7, {
+  }, closeIcon || /* @__PURE__ */ React.createElement(RefIcon$a, {
     className: `${prefixCls}-close-icon`
   }));
 }
@@ -23963,7 +24004,7 @@ const useStyle$5 = genStyleHooks("Modal", (token2) => {
     titleLineHeight: true
   }
 });
-var __rest$e = function(s, e2) {
+var __rest$j = function(s, e2) {
   var t2 = {};
   for (var p2 in s)
     if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
@@ -24024,7 +24065,7 @@ const Modal$1 = (props) => {
     footer,
     classNames: modalClassNames,
     styles: modalStyles
-  } = props, restProps = __rest$e(props, ["prefixCls", "className", "rootClassName", "open", "wrapClassName", "centered", "getContainer", "focusTriggerAfterClose", "style", "visible", "width", "footer", "classNames", "styles"]);
+  } = props, restProps = __rest$j(props, ["prefixCls", "className", "rootClassName", "open", "wrapClassName", "centered", "getContainer", "focusTriggerAfterClose", "style", "visible", "width", "footer", "classNames", "styles"]);
   const prefixCls = getPrefixCls("modal", customizePrefixCls);
   const rootPrefixCls = getPrefixCls();
   const rootCls = useCSSVarCls(prefixCls);
@@ -24039,7 +24080,7 @@ const Modal$1 = (props) => {
   }));
   const [mergedClosable, mergedCloseIcon] = useClosable(pickClosable(props), pickClosable(modalContext), {
     closable: true,
-    closeIcon: /* @__PURE__ */ reactExports.createElement(RefIcon$7, {
+    closeIcon: /* @__PURE__ */ reactExports.createElement(RefIcon$a, {
       className: `${prefixCls}-close-icon`
     }),
     closeIconRender: (icon) => renderCloseIcon(prefixCls, icon)
@@ -24169,7 +24210,7 @@ const Confirm = genSubStyleComponent(["Modal", "confirm"], (token2) => {
   // confirm is weak than modal since no conflict here
   order: -1e3
 });
-var __rest$d = function(s, e2) {
+var __rest$i = function(s, e2) {
   var t2 = {};
   for (var p2 in s)
     if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
@@ -24193,21 +24234,21 @@ function ConfirmContent(props) {
     footer,
     // Legacy for static function usage
     locale: staticLocale
-  } = props, resetProps = __rest$d(props, ["prefixCls", "icon", "okText", "cancelText", "confirmPrefixCls", "type", "okCancel", "footer", "locale"]);
+  } = props, resetProps = __rest$i(props, ["prefixCls", "icon", "okText", "cancelText", "confirmPrefixCls", "type", "okCancel", "footer", "locale"]);
   let mergedIcon = icon;
   if (!icon && icon !== null) {
     switch (type4) {
       case "info":
-        mergedIcon = /* @__PURE__ */ reactExports.createElement(RefIcon$5, null);
-        break;
-      case "success":
-        mergedIcon = /* @__PURE__ */ reactExports.createElement(RefIcon$9, null);
-        break;
-      case "error":
         mergedIcon = /* @__PURE__ */ reactExports.createElement(RefIcon$8, null);
         break;
+      case "success":
+        mergedIcon = /* @__PURE__ */ reactExports.createElement(RefIcon$c, null);
+        break;
+      case "error":
+        mergedIcon = /* @__PURE__ */ reactExports.createElement(RefIcon$b, null);
+        break;
       default:
-        mergedIcon = /* @__PURE__ */ reactExports.createElement(RefIcon$6, null);
+        mergedIcon = /* @__PURE__ */ reactExports.createElement(RefIcon$9, null);
     }
   }
   const mergedOkCancel = okCancel !== null && okCancel !== void 0 ? okCancel : type4 === "confirm";
@@ -24472,7 +24513,7 @@ function modalGlobalConfig(_ref) {
   } = _ref;
   defaultRootPrefixCls = rootPrefixCls;
 }
-var __rest$c = function(s, e2) {
+var __rest$h = function(s, e2) {
   var t2 = {};
   for (var p2 in s)
     if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
@@ -24489,7 +24530,7 @@ const HookModal = (_a, ref) => {
   var {
     afterClose: hookAfterClose,
     config
-  } = _a, restProps = __rest$c(_a, ["afterClose", "config"]);
+  } = _a, restProps = __rest$h(_a, ["afterClose", "config"]);
   const [open, setOpen] = reactExports.useState(true);
   const [innerConfig, setInnerConfig] = reactExports.useState(config);
   const {
@@ -25768,7 +25809,7 @@ var CheckOutlined = function CheckOutlined2(props, ref) {
     icon: CheckOutlined$1
   }));
 };
-var RefIcon$3 = /* @__PURE__ */ reactExports.forwardRef(CheckOutlined);
+var RefIcon$6 = /* @__PURE__ */ reactExports.forwardRef(CheckOutlined);
 var SearchOutlined$1 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z" } }] }, "name": "search", "theme": "outlined" };
 var SearchOutlined = function SearchOutlined2(props, ref) {
   return /* @__PURE__ */ reactExports.createElement(Icon, _extends({}, props, {
@@ -25776,7 +25817,7 @@ var SearchOutlined = function SearchOutlined2(props, ref) {
     icon: SearchOutlined$1
   }));
 };
-var RefIcon$2 = /* @__PURE__ */ reactExports.forwardRef(SearchOutlined);
+var RefIcon$5 = /* @__PURE__ */ reactExports.forwardRef(SearchOutlined);
 const responsiveArray = ["xxl", "xl", "lg", "md", "sm", "xs"];
 const getResponsiveMap = (token2) => ({
   xs: `(max-width: ${token2.screenXSMax}px)`,
@@ -26564,7 +26605,7 @@ const PurePanel$2 = (props) => {
     overlayInnerStyle: formattedOverlayInnerStyle
   }), title)));
 };
-var __rest$b = function(s, e2) {
+var __rest$g = function(s, e2) {
   var t2 = {};
   for (var p2 in s)
     if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
@@ -26658,7 +26699,7 @@ const InternalTooltip = /* @__PURE__ */ reactExports.forwardRef((props, ref) => 
     mouseLeaveDelay = 0.1,
     overlayStyle,
     rootClassName
-  } = props, otherProps = __rest$b(props, ["getPopupContainer", "placement", "mouseEnterDelay", "mouseLeaveDelay", "overlayStyle", "rootClassName"]);
+  } = props, otherProps = __rest$g(props, ["getPopupContainer", "placement", "mouseEnterDelay", "mouseLeaveDelay", "overlayStyle", "rootClassName"]);
   const prefixCls = getPrefixCls("tooltip", customizePrefixCls);
   const rootPrefixCls = getPrefixCls();
   const injectFromPopover = props["data-popover-inject"];
@@ -27696,63 +27737,6 @@ const useStyle$3 = genStyleHooks("Input", (token2) => {
 }, initComponentToken, {
   resetFont: false
 });
-function throttle(delay, callback, options) {
-  var _ref = options || {}, _ref$noTrailing = _ref.noTrailing, noTrailing = _ref$noTrailing === void 0 ? false : _ref$noTrailing, _ref$noLeading = _ref.noLeading, noLeading = _ref$noLeading === void 0 ? false : _ref$noLeading, _ref$debounceMode = _ref.debounceMode, debounceMode = _ref$debounceMode === void 0 ? void 0 : _ref$debounceMode;
-  var timeoutID;
-  var cancelled = false;
-  var lastExec = 0;
-  function clearExistingTimeout() {
-    if (timeoutID) {
-      clearTimeout(timeoutID);
-    }
-  }
-  function cancel(options2) {
-    var _ref2 = options2 || {}, _ref2$upcomingOnly = _ref2.upcomingOnly, upcomingOnly = _ref2$upcomingOnly === void 0 ? false : _ref2$upcomingOnly;
-    clearExistingTimeout();
-    cancelled = !upcomingOnly;
-  }
-  function wrapper() {
-    for (var _len = arguments.length, arguments_ = new Array(_len), _key = 0; _key < _len; _key++) {
-      arguments_[_key] = arguments[_key];
-    }
-    var self2 = this;
-    var elapsed = Date.now() - lastExec;
-    if (cancelled) {
-      return;
-    }
-    function exec() {
-      lastExec = Date.now();
-      callback.apply(self2, arguments_);
-    }
-    function clear() {
-      timeoutID = void 0;
-    }
-    if (!noLeading && debounceMode && !timeoutID) {
-      exec();
-    }
-    clearExistingTimeout();
-    if (debounceMode === void 0 && elapsed > delay) {
-      if (noLeading) {
-        lastExec = Date.now();
-        if (!noTrailing) {
-          timeoutID = setTimeout(debounceMode ? clear : exec, delay);
-        }
-      } else {
-        exec();
-      }
-    } else if (noTrailing !== true) {
-      timeoutID = setTimeout(debounceMode ? clear : exec, debounceMode === void 0 ? delay - elapsed : delay);
-    }
-  }
-  wrapper.cancel = cancel;
-  return wrapper;
-}
-function debounce(delay, callback, options) {
-  var _ref = {}, _ref$atBegin = _ref.atBegin, atBegin = _ref$atBegin === void 0 ? false : _ref$atBegin;
-  return throttle(delay, callback, {
-    debounceMode: atBegin !== false
-  });
-}
 const RowContext = /* @__PURE__ */ reactExports.createContext({});
 const genGridRowStyle = (token2) => {
   const {
@@ -27905,7 +27889,7 @@ genStyleHooks("Grid", (token2) => {
   };
   return [genGridColStyle(gridToken), genGridStyle(gridToken, ""), genGridStyle(gridToken, "-xs"), Object.keys(gridMediaSizesMap).map((key) => genGridMediaStyle(gridToken, gridMediaSizesMap[key], key)).reduce((pre, cur) => Object.assign(Object.assign({}, pre), cur), {})];
 }, prepareColComponentToken);
-var __rest$a = function(s, e2) {
+var __rest$f = function(s, e2) {
   var t2 = {};
   for (var p2 in s)
     if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
@@ -27953,7 +27937,7 @@ const Row = /* @__PURE__ */ reactExports.forwardRef((props, ref) => {
     children,
     gutter = 0,
     wrap
-  } = props, others = __rest$a(props, ["prefixCls", "justify", "align", "className", "style", "children", "gutter", "wrap"]);
+  } = props, others = __rest$f(props, ["prefixCls", "justify", "align", "className", "style", "children", "gutter", "wrap"]);
   const {
     getPrefixCls,
     direction
@@ -28174,7 +28158,7 @@ const useStyle$2 = genStyleHooks("Divider", (token2) => {
     orientationMargin: true
   }
 });
-var __rest$9 = function(s, e2) {
+var __rest$e = function(s, e2) {
   var t2 = {};
   for (var p2 in s)
     if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
@@ -28203,7 +28187,7 @@ const Divider = (props) => {
     dashed,
     plain,
     style: style2
-  } = props, restProps = __rest$9(props, ["prefixCls", "type", "orientation", "orientationMargin", "className", "rootClassName", "children", "dashed", "plain", "style"]);
+  } = props, restProps = __rest$e(props, ["prefixCls", "type", "orientation", "orientationMargin", "className", "rootClassName", "children", "dashed", "plain", "style"]);
   const prefixCls = getPrefixCls("divider", customizePrefixCls);
   const [wrapCSSVar, hashId, cssVarCls] = useStyle$2(prefixCls);
   const orientationPrefix = orientation.length > 0 ? `-${orientation}` : orientation;
@@ -28604,7 +28588,7 @@ const getAllowClear = (allowClear) => {
     mergedAllowClear = allowClear;
   } else if (allowClear) {
     mergedAllowClear = {
-      clearIcon: /* @__PURE__ */ React.createElement(RefIcon$8, null)
+      clearIcon: /* @__PURE__ */ React.createElement(RefIcon$b, null)
     };
   }
   return mergedAllowClear;
@@ -28634,7 +28618,7 @@ function useRemovePasswordTimeout(inputRef, triggerOnMount) {
 function hasPrefixSuffix(props) {
   return !!(props.prefix || props.suffix || props.allowClear || props.showCount);
 }
-var __rest$8 = function(s, e2) {
+var __rest$d = function(s, e2) {
   var t2 = {};
   for (var p2 in s)
     if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
@@ -28690,7 +28674,7 @@ const Input$1 = /* @__PURE__ */ reactExports.forwardRef((props, ref) => {
     onChange,
     classNames: classes,
     variant: customVariant
-  } = props, rest = __rest$8(props, ["prefixCls", "bordered", "status", "size", "disabled", "onBlur", "onFocus", "suffix", "allowClear", "addonAfter", "addonBefore", "className", "style", "styles", "rootClassName", "onChange", "classNames", "variant"]);
+  } = props, rest = __rest$d(props, ["prefixCls", "bordered", "status", "size", "disabled", "onBlur", "onFocus", "suffix", "allowClear", "addonAfter", "addonBefore", "className", "style", "styles", "rootClassName", "onChange", "classNames", "variant"]);
   const {
     getPrefixCls,
     direction,
@@ -28814,7 +28798,7 @@ const useStyle$1 = genStyleHooks(["Input", "OTP"], (token2) => {
   const inputToken = merge(token2, initInputToken(token2));
   return [genOTPStyle(inputToken)];
 }, initComponentToken);
-var __rest$7 = function(s, e2) {
+var __rest$c = function(s, e2) {
   var t2 = {};
   for (var p2 in s)
     if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
@@ -28833,7 +28817,7 @@ const OTPInput = /* @__PURE__ */ reactExports.forwardRef((props, ref) => {
     onActiveChange,
     index: index2,
     mask
-  } = props, restProps = __rest$7(props, ["value", "onChange", "onActiveChange", "index", "mask"]);
+  } = props, restProps = __rest$c(props, ["value", "onChange", "onActiveChange", "index", "mask"]);
   const internalValue = value && typeof mask === "string" ? mask : value;
   const onInternalChange = (e2) => {
     onChange(index2, e2.target.value);
@@ -28878,7 +28862,7 @@ const OTPInput = /* @__PURE__ */ reactExports.forwardRef((props, ref) => {
     type: mask === true ? "password" : "text"
   }));
 });
-var __rest$6 = function(s, e2) {
+var __rest$b = function(s, e2) {
   var t2 = {};
   for (var p2 in s)
     if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
@@ -28907,7 +28891,7 @@ const OTP = /* @__PURE__ */ reactExports.forwardRef((props, ref) => {
     status: customStatus,
     autoFocus,
     mask
-  } = props, restProps = __rest$6(props, ["prefixCls", "length", "size", "defaultValue", "value", "onChange", "formatter", "variant", "disabled", "status", "autoFocus", "mask"]);
+  } = props, restProps = __rest$b(props, ["prefixCls", "length", "size", "defaultValue", "value", "onChange", "formatter", "variant", "disabled", "status", "autoFocus", "mask"]);
   const {
     getPrefixCls,
     direction
@@ -29040,7 +29024,7 @@ var EyeInvisibleOutlined = function EyeInvisibleOutlined2(props, ref) {
     icon: EyeInvisibleOutlined$1
   }));
 };
-var RefIcon$1 = /* @__PURE__ */ reactExports.forwardRef(EyeInvisibleOutlined);
+var RefIcon$4 = /* @__PURE__ */ reactExports.forwardRef(EyeInvisibleOutlined);
 var EyeOutlined$1 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 000 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z" } }] }, "name": "eye", "theme": "outlined" };
 var EyeOutlined = function EyeOutlined2(props, ref) {
   return /* @__PURE__ */ reactExports.createElement(Icon, _extends({}, props, {
@@ -29048,8 +29032,8 @@ var EyeOutlined = function EyeOutlined2(props, ref) {
     icon: EyeOutlined$1
   }));
 };
-var RefIcon = /* @__PURE__ */ reactExports.forwardRef(EyeOutlined);
-var __rest$5 = function(s, e2) {
+var RefIcon$3 = /* @__PURE__ */ reactExports.forwardRef(EyeOutlined);
+var __rest$a = function(s, e2) {
   var t2 = {};
   for (var p2 in s)
     if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
@@ -29061,7 +29045,7 @@ var __rest$5 = function(s, e2) {
     }
   return t2;
 };
-const defaultIconRender = (visible) => visible ? /* @__PURE__ */ reactExports.createElement(RefIcon, null) : /* @__PURE__ */ reactExports.createElement(RefIcon$1, null);
+const defaultIconRender = (visible) => visible ? /* @__PURE__ */ reactExports.createElement(RefIcon$3, null) : /* @__PURE__ */ reactExports.createElement(RefIcon$4, null);
 const actionMap = {
   click: "onClick",
   hover: "onMouseOver"
@@ -29119,7 +29103,7 @@ const Password = /* @__PURE__ */ reactExports.forwardRef((props, ref) => {
     prefixCls: customizePrefixCls,
     inputPrefixCls: customizeInputPrefixCls,
     size
-  } = props, restProps = __rest$5(props, ["className", "prefixCls", "inputPrefixCls", "size"]);
+  } = props, restProps = __rest$a(props, ["className", "prefixCls", "inputPrefixCls", "size"]);
   const {
     getPrefixCls
   } = reactExports.useContext(ConfigContext);
@@ -29142,7 +29126,7 @@ const Password = /* @__PURE__ */ reactExports.forwardRef((props, ref) => {
     ref: composeRef(ref, inputRef)
   }, omittedProps));
 });
-var __rest$4 = function(s, e2) {
+var __rest$9 = function(s, e2) {
   var t2 = {};
   for (var p2 in s)
     if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
@@ -29169,7 +29153,7 @@ const Search = /* @__PURE__ */ reactExports.forwardRef((props, ref) => {
     onChange: customOnChange,
     onCompositionStart,
     onCompositionEnd
-  } = props, restProps = __rest$4(props, ["prefixCls", "inputPrefixCls", "className", "size", "suffix", "enterButton", "addonAfter", "loading", "disabled", "onSearch", "onChange", "onCompositionStart", "onCompositionEnd"]);
+  } = props, restProps = __rest$9(props, ["prefixCls", "inputPrefixCls", "className", "size", "suffix", "enterButton", "addonAfter", "loading", "disabled", "onSearch", "onChange", "onCompositionStart", "onCompositionEnd"]);
   const {
     getPrefixCls,
     direction
@@ -29215,7 +29199,7 @@ const Search = /* @__PURE__ */ reactExports.forwardRef((props, ref) => {
     }
     onSearch(e2);
   };
-  const searchIcon = typeof enterButton === "boolean" ? /* @__PURE__ */ reactExports.createElement(RefIcon$2, null) : null;
+  const searchIcon = typeof enterButton === "boolean" ? /* @__PURE__ */ reactExports.createElement(RefIcon$5, null) : null;
   const btnClassName = `${prefixCls}-button`;
   let button;
   const enterButtonAsElement = enterButton || {};
@@ -29621,7 +29605,7 @@ var TextArea$1 = /* @__PURE__ */ React.forwardRef(function(_ref, ref) {
     ref: resizableTextAreaRef
   })));
 });
-var __rest$3 = function(s, e2) {
+var __rest$8 = function(s, e2) {
   var t2 = {};
   for (var p2 in s)
     if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
@@ -29648,7 +29632,7 @@ const TextArea = /* @__PURE__ */ reactExports.forwardRef((props, ref) => {
     style: style2,
     styles,
     variant: customVariant
-  } = props, rest = __rest$3(props, ["prefixCls", "bordered", "size", "disabled", "status", "allowClear", "classNames", "rootClassName", "className", "style", "styles", "variant"]);
+  } = props, rest = __rest$8(props, ["prefixCls", "bordered", "size", "disabled", "status", "allowClear", "classNames", "rootClassName", "className", "style", "styles", "variant"]);
   const {
     getPrefixCls,
     direction,
@@ -29719,367 +29703,6 @@ Input.Search = Search;
 Input.TextArea = TextArea;
 Input.Password = Password;
 Input.OTP = OTP;
-const antSpinMove = new Keyframe("antSpinMove", {
-  to: {
-    opacity: 1
-  }
-});
-const antRotate = new Keyframe("antRotate", {
-  to: {
-    transform: "rotate(405deg)"
-  }
-});
-const genSpinStyle = (token2) => {
-  const {
-    componentCls,
-    calc
-  } = token2;
-  return {
-    [`${componentCls}`]: Object.assign(Object.assign({}, resetComponent(token2)), {
-      position: "absolute",
-      display: "none",
-      color: token2.colorPrimary,
-      fontSize: 0,
-      textAlign: "center",
-      verticalAlign: "middle",
-      opacity: 0,
-      transition: `transform ${token2.motionDurationSlow} ${token2.motionEaseInOutCirc}`,
-      "&-spinning": {
-        position: "static",
-        display: "inline-block",
-        opacity: 1
-      },
-      [`${componentCls}-text`]: {
-        fontSize: token2.fontSize,
-        paddingTop: calc(calc(token2.dotSize).sub(token2.fontSize)).div(2).add(2).equal()
-      },
-      "&-fullscreen": {
-        position: "fixed",
-        width: "100vw",
-        height: "100vh",
-        backgroundColor: token2.colorBgMask,
-        zIndex: token2.zIndexPopupBase,
-        inset: 0,
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-        justifyContent: "center",
-        opacity: 0,
-        visibility: "hidden",
-        transition: `all ${token2.motionDurationMid}`,
-        "&-show": {
-          opacity: 1,
-          visibility: "visible"
-        },
-        [`${componentCls}-dot ${componentCls}-dot-item`]: {
-          backgroundColor: token2.colorWhite
-        },
-        [`${componentCls}-text`]: {
-          color: token2.colorTextLightSolid
-        }
-      },
-      "&-nested-loading": {
-        position: "relative",
-        [`> div > ${componentCls}`]: {
-          position: "absolute",
-          top: 0,
-          insetInlineStart: 0,
-          zIndex: 4,
-          display: "block",
-          width: "100%",
-          height: "100%",
-          maxHeight: token2.contentHeight,
-          [`${componentCls}-dot`]: {
-            position: "absolute",
-            top: "50%",
-            insetInlineStart: "50%",
-            margin: calc(token2.dotSize).mul(-1).div(2).equal()
-          },
-          [`${componentCls}-text`]: {
-            position: "absolute",
-            top: "50%",
-            width: "100%",
-            textShadow: `0 1px 2px ${token2.colorBgContainer}`
-            // FIXME: shadow
-          },
-          [`&${componentCls}-show-text ${componentCls}-dot`]: {
-            marginTop: calc(token2.dotSize).div(2).mul(-1).sub(10).equal()
-          },
-          "&-sm": {
-            [`${componentCls}-dot`]: {
-              margin: calc(token2.dotSizeSM).mul(-1).div(2).equal()
-            },
-            [`${componentCls}-text`]: {
-              paddingTop: calc(calc(token2.dotSizeSM).sub(token2.fontSize)).div(2).add(2).equal()
-            },
-            [`&${componentCls}-show-text ${componentCls}-dot`]: {
-              marginTop: calc(token2.dotSizeSM).div(2).mul(-1).sub(10).equal()
-            }
-          },
-          "&-lg": {
-            [`${componentCls}-dot`]: {
-              margin: calc(token2.dotSizeLG).mul(-1).div(2).equal()
-            },
-            [`${componentCls}-text`]: {
-              paddingTop: calc(calc(token2.dotSizeLG).sub(token2.fontSize)).div(2).add(2).equal()
-            },
-            [`&${componentCls}-show-text ${componentCls}-dot`]: {
-              marginTop: calc(token2.dotSizeLG).div(2).mul(-1).sub(10).equal()
-            }
-          }
-        },
-        [`${componentCls}-container`]: {
-          position: "relative",
-          transition: `opacity ${token2.motionDurationSlow}`,
-          "&::after": {
-            position: "absolute",
-            top: 0,
-            insetInlineEnd: 0,
-            bottom: 0,
-            insetInlineStart: 0,
-            zIndex: 10,
-            width: "100%",
-            height: "100%",
-            background: token2.colorBgContainer,
-            opacity: 0,
-            transition: `all ${token2.motionDurationSlow}`,
-            content: '""',
-            pointerEvents: "none"
-          }
-        },
-        [`${componentCls}-blur`]: {
-          clear: "both",
-          opacity: 0.5,
-          userSelect: "none",
-          pointerEvents: "none",
-          [`&::after`]: {
-            opacity: 0.4,
-            pointerEvents: "auto"
-          }
-        }
-      },
-      // tip
-      // ------------------------------
-      [`&-tip`]: {
-        color: token2.spinDotDefault
-      },
-      // dots
-      // ------------------------------
-      [`${componentCls}-dot`]: {
-        position: "relative",
-        display: "inline-block",
-        fontSize: token2.dotSize,
-        width: "1em",
-        height: "1em",
-        "&-item": {
-          position: "absolute",
-          display: "block",
-          width: calc(token2.dotSize).sub(calc(token2.marginXXS).div(2)).div(2).equal(),
-          height: calc(token2.dotSize).sub(calc(token2.marginXXS).div(2)).div(2).equal(),
-          backgroundColor: token2.colorPrimary,
-          borderRadius: "100%",
-          transform: "scale(0.75)",
-          transformOrigin: "50% 50%",
-          opacity: 0.3,
-          animationName: antSpinMove,
-          animationDuration: "1s",
-          animationIterationCount: "infinite",
-          animationTimingFunction: "linear",
-          animationDirection: "alternate",
-          "&:nth-child(1)": {
-            top: 0,
-            insetInlineStart: 0,
-            animationDelay: "0s"
-          },
-          "&:nth-child(2)": {
-            top: 0,
-            insetInlineEnd: 0,
-            animationDelay: "0.4s"
-          },
-          "&:nth-child(3)": {
-            insetInlineEnd: 0,
-            bottom: 0,
-            animationDelay: "0.8s"
-          },
-          "&:nth-child(4)": {
-            bottom: 0,
-            insetInlineStart: 0,
-            animationDelay: "1.2s"
-          }
-        },
-        "&-spin": {
-          transform: "rotate(45deg)",
-          animationName: antRotate,
-          animationDuration: "1.2s",
-          animationIterationCount: "infinite",
-          animationTimingFunction: "linear"
-        }
-      },
-      // small
-      [`&-sm ${componentCls}-dot`]: {
-        fontSize: token2.dotSizeSM,
-        i: {
-          width: calc(calc(token2.dotSizeSM).sub(calc(token2.marginXXS).div(2))).div(2).equal(),
-          height: calc(calc(token2.dotSizeSM).sub(calc(token2.marginXXS).div(2))).div(2).equal()
-        }
-      },
-      // large
-      [`&-lg ${componentCls}-dot`]: {
-        fontSize: token2.dotSizeLG,
-        i: {
-          width: calc(calc(token2.dotSizeLG).sub(token2.marginXXS)).div(2).equal(),
-          height: calc(calc(token2.dotSizeLG).sub(token2.marginXXS)).div(2).equal()
-        }
-      },
-      [`&${componentCls}-show-text ${componentCls}-text`]: {
-        display: "block"
-      }
-    })
-  };
-};
-const prepareComponentToken = (token2) => {
-  const {
-    controlHeightLG,
-    controlHeight
-  } = token2;
-  return {
-    contentHeight: 400,
-    dotSize: controlHeightLG / 2,
-    dotSizeSM: controlHeightLG * 0.35,
-    dotSizeLG: controlHeight
-  };
-};
-const useStyle = genStyleHooks("Spin", (token2) => {
-  const spinToken = merge(token2, {
-    spinDotDefault: token2.colorTextDescription
-  });
-  return [genSpinStyle(spinToken)];
-}, prepareComponentToken);
-var __rest$2 = function(s, e2) {
-  var t2 = {};
-  for (var p2 in s)
-    if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
-      t2[p2] = s[p2];
-  if (s != null && typeof Object.getOwnPropertySymbols === "function")
-    for (var i = 0, p2 = Object.getOwnPropertySymbols(s); i < p2.length; i++) {
-      if (e2.indexOf(p2[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p2[i]))
-        t2[p2[i]] = s[p2[i]];
-    }
-  return t2;
-};
-let defaultIndicator = null;
-function renderIndicator(prefixCls, props) {
-  const {
-    indicator
-  } = props;
-  const dotClassName = `${prefixCls}-dot`;
-  if (indicator === null) {
-    return null;
-  }
-  if (/* @__PURE__ */ reactExports.isValidElement(indicator)) {
-    return cloneElement(indicator, {
-      className: classNames(indicator.props.className, dotClassName)
-    });
-  }
-  if (/* @__PURE__ */ reactExports.isValidElement(defaultIndicator)) {
-    return cloneElement(defaultIndicator, {
-      className: classNames(defaultIndicator.props.className, dotClassName)
-    });
-  }
-  return /* @__PURE__ */ reactExports.createElement("span", {
-    className: classNames(dotClassName, `${prefixCls}-dot-spin`)
-  }, /* @__PURE__ */ reactExports.createElement("i", {
-    className: `${prefixCls}-dot-item`,
-    key: 1
-  }), /* @__PURE__ */ reactExports.createElement("i", {
-    className: `${prefixCls}-dot-item`,
-    key: 2
-  }), /* @__PURE__ */ reactExports.createElement("i", {
-    className: `${prefixCls}-dot-item`,
-    key: 3
-  }), /* @__PURE__ */ reactExports.createElement("i", {
-    className: `${prefixCls}-dot-item`,
-    key: 4
-  }));
-}
-function shouldDelay(spinning, delay) {
-  return !!spinning && !!delay && !isNaN(Number(delay));
-}
-const Spin = (props) => {
-  const {
-    prefixCls: customizePrefixCls,
-    spinning: customSpinning = true,
-    delay = 0,
-    className,
-    rootClassName,
-    size = "default",
-    tip,
-    wrapperClassName,
-    style: style2,
-    children,
-    fullscreen = false
-  } = props, restProps = __rest$2(props, ["prefixCls", "spinning", "delay", "className", "rootClassName", "size", "tip", "wrapperClassName", "style", "children", "fullscreen"]);
-  const {
-    getPrefixCls
-  } = reactExports.useContext(ConfigContext);
-  const prefixCls = getPrefixCls("spin", customizePrefixCls);
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
-  const [spinning, setSpinning] = reactExports.useState(() => customSpinning && !shouldDelay(customSpinning, delay));
-  reactExports.useEffect(() => {
-    if (customSpinning) {
-      const showSpinning = debounce(delay, () => {
-        setSpinning(true);
-      });
-      showSpinning();
-      return () => {
-        var _a;
-        (_a = showSpinning === null || showSpinning === void 0 ? void 0 : showSpinning.cancel) === null || _a === void 0 ? void 0 : _a.call(showSpinning);
-      };
-    }
-    setSpinning(false);
-  }, [delay, customSpinning]);
-  const isNestedPattern = reactExports.useMemo(() => typeof children !== "undefined" && !fullscreen, [children, fullscreen]);
-  const {
-    direction,
-    spin
-  } = reactExports.useContext(ConfigContext);
-  const spinClassName = classNames(prefixCls, spin === null || spin === void 0 ? void 0 : spin.className, {
-    [`${prefixCls}-sm`]: size === "small",
-    [`${prefixCls}-lg`]: size === "large",
-    [`${prefixCls}-spinning`]: spinning,
-    [`${prefixCls}-show-text`]: !!tip,
-    [`${prefixCls}-fullscreen`]: fullscreen,
-    [`${prefixCls}-fullscreen-show`]: fullscreen && spinning,
-    [`${prefixCls}-rtl`]: direction === "rtl"
-  }, className, rootClassName, hashId, cssVarCls);
-  const containerClassName = classNames(`${prefixCls}-container`, {
-    [`${prefixCls}-blur`]: spinning
-  });
-  const divProps = omit(restProps, ["indicator"]);
-  const mergedStyle = Object.assign(Object.assign({}, spin === null || spin === void 0 ? void 0 : spin.style), style2);
-  const spinElement = /* @__PURE__ */ reactExports.createElement("div", Object.assign({}, divProps, {
-    style: mergedStyle,
-    className: spinClassName,
-    "aria-live": "polite",
-    "aria-busy": spinning
-  }), renderIndicator(prefixCls, props), tip && (isNestedPattern || fullscreen) ? /* @__PURE__ */ reactExports.createElement("div", {
-    className: `${prefixCls}-text`
-  }, tip) : null);
-  if (isNestedPattern) {
-    return wrapCSSVar(/* @__PURE__ */ reactExports.createElement("div", Object.assign({}, divProps, {
-      className: classNames(`${prefixCls}-nested-loading`, wrapperClassName, hashId, cssVarCls)
-    }), spinning && /* @__PURE__ */ reactExports.createElement("div", {
-      key: "loading"
-    }, spinElement), /* @__PURE__ */ reactExports.createElement("div", {
-      className: containerClassName,
-      key: "container"
-    }, children)));
-  }
-  return wrapCSSVar(spinElement);
-};
-Spin.setDefaultIndicator = (indicator) => {
-  defaultIndicator = indicator;
-};
 function isPresetSize(size) {
   return ["small", "middle", "large"].includes(size);
 }
@@ -30114,7 +29737,7 @@ const Item = (_ref) => {
     className: `${className}-split`
   }, split));
 };
-var __rest$1 = function(s, e2) {
+var __rest$7 = function(s, e2) {
   var t2 = {};
   for (var p2 in s)
     if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
@@ -30146,7 +29769,7 @@ const InternalSpace = /* @__PURE__ */ reactExports.forwardRef((props, ref) => {
     wrap = false,
     classNames: customClassNames,
     styles
-  } = props, otherProps = __rest$1(props, ["size", "align", "className", "rootClassName", "children", "direction", "prefixCls", "split", "style", "wrap", "classNames", "styles"]);
+  } = props, otherProps = __rest$7(props, ["size", "align", "className", "rootClassName", "children", "direction", "prefixCls", "split", "style", "wrap", "classNames", "styles"]);
   const [horizontalSize, verticalSize] = Array.isArray(size) ? size : [size, size];
   const isPresetVerticalSize = isPresetSize(verticalSize);
   const isPresetHorizontalSize = isPresetSize(horizontalSize);
@@ -30206,7 +29829,7 @@ const InternalSpace = /* @__PURE__ */ reactExports.forwardRef((props, ref) => {
 });
 const Space = InternalSpace;
 Space.Compact = Compact;
-var __rest = function(s, e2) {
+var __rest$6 = function(s, e2) {
   var t2 = {};
   for (var p2 in s)
     if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
@@ -30228,7 +29851,7 @@ const PurePanel = (props) => {
     title,
     children,
     footer
-  } = props, restProps = __rest(props, ["prefixCls", "className", "closeIcon", "closable", "type", "title", "children", "footer"]);
+  } = props, restProps = __rest$6(props, ["prefixCls", "className", "closeIcon", "closable", "type", "title", "children", "footer"]);
   const {
     getPrefixCls
   } = reactExports.useContext(ConfigContext);
@@ -30296,6 +29919,1456 @@ Modal.destroyAll = function destroyAllFn() {
 };
 Modal.config = modalGlobalConfig;
 Modal._InternalPanelDoNotUseOrYouWillBeFired = PurePanel$1;
+var __rest$5 = function(s, e2) {
+  var t2 = {};
+  for (var p2 in s)
+    if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
+      t2[p2] = s[p2];
+  if (s != null && typeof Object.getOwnPropertySymbols === "function")
+    for (var i = 0, p2 = Object.getOwnPropertySymbols(s); i < p2.length; i++) {
+      if (e2.indexOf(p2[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p2[i]))
+        t2[p2[i]] = s[p2[i]];
+    }
+  return t2;
+};
+const inlineStyle = {
+  border: 0,
+  background: "transparent",
+  padding: 0,
+  lineHeight: "inherit",
+  display: "inline-block"
+};
+const TransButton = /* @__PURE__ */ reactExports.forwardRef((props, ref) => {
+  const onKeyDown = (event) => {
+    const {
+      keyCode
+    } = event;
+    if (keyCode === KeyCode.ENTER) {
+      event.preventDefault();
+    }
+  };
+  const onKeyUp = (event) => {
+    const {
+      keyCode
+    } = event;
+    const {
+      onClick
+    } = props;
+    if (keyCode === KeyCode.ENTER && onClick) {
+      onClick();
+    }
+  };
+  const {
+    style: style2,
+    noStyle,
+    disabled,
+    tabIndex = 0
+  } = props, restProps = __rest$5(props, ["style", "noStyle", "disabled", "tabIndex"]);
+  let mergedStyle = {};
+  if (!noStyle) {
+    mergedStyle = Object.assign({}, inlineStyle);
+  }
+  if (disabled) {
+    mergedStyle.pointerEvents = "none";
+  }
+  mergedStyle = Object.assign(Object.assign({}, mergedStyle), style2);
+  return /* @__PURE__ */ reactExports.createElement("div", Object.assign({
+    role: "button",
+    tabIndex,
+    ref
+  }, restProps, {
+    onKeyDown,
+    onKeyUp,
+    style: mergedStyle
+  }));
+});
+var EditOutlined$1 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z" } }] }, "name": "edit", "theme": "outlined" };
+var EditOutlined = function EditOutlined2(props, ref) {
+  return /* @__PURE__ */ reactExports.createElement(Icon, _extends({}, props, {
+    ref,
+    icon: EditOutlined$1
+  }));
+};
+var RefIcon$2 = /* @__PURE__ */ reactExports.forwardRef(EditOutlined);
+var EnterOutlined$1 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M864 170h-60c-4.4 0-8 3.6-8 8v518H310v-73c0-6.7-7.8-10.5-13-6.3l-141.9 112a8 8 0 000 12.6l141.9 112c5.3 4.2 13 .4 13-6.3v-75h498c35.3 0 64-28.7 64-64V178c0-4.4-3.6-8-8-8z" } }] }, "name": "enter", "theme": "outlined" };
+var EnterOutlined = function EnterOutlined2(props, ref) {
+  return /* @__PURE__ */ reactExports.createElement(Icon, _extends({}, props, {
+    ref,
+    icon: EnterOutlined$1
+  }));
+};
+var RefIcon$1 = /* @__PURE__ */ reactExports.forwardRef(EnterOutlined);
+const getTitleStyle = (fontSize, lineHeight, color, token2) => {
+  const {
+    titleMarginBottom,
+    fontWeightStrong
+  } = token2;
+  return {
+    marginBottom: titleMarginBottom,
+    color,
+    fontWeight: fontWeightStrong,
+    fontSize,
+    lineHeight
+  };
+};
+const getTitleStyles = (token2) => {
+  const headings = [1, 2, 3, 4, 5];
+  const styles = {};
+  headings.forEach((headingLevel) => {
+    styles[`
+      h${headingLevel}&,
+      div&-h${headingLevel},
+      div&-h${headingLevel} > textarea,
+      h${headingLevel}
+    `] = getTitleStyle(token2[`fontSizeHeading${headingLevel}`], token2[`lineHeightHeading${headingLevel}`], token2.colorTextHeading, token2);
+  });
+  return styles;
+};
+const getLinkStyles = (token2) => {
+  const {
+    componentCls
+  } = token2;
+  return {
+    "a&, a": Object.assign(Object.assign({}, operationUnit(token2)), {
+      textDecoration: token2.linkDecoration,
+      "&:active, &:hover": {
+        textDecoration: token2.linkHoverDecoration
+      },
+      [`&[disabled], &${componentCls}-disabled`]: {
+        color: token2.colorTextDisabled,
+        cursor: "not-allowed",
+        "&:active, &:hover": {
+          color: token2.colorTextDisabled
+        },
+        "&:active": {
+          pointerEvents: "none"
+        }
+      }
+    })
+  };
+};
+const getResetStyles = (token2) => ({
+  code: {
+    margin: "0 0.2em",
+    paddingInline: "0.4em",
+    paddingBlock: "0.2em 0.1em",
+    fontSize: "85%",
+    fontFamily: token2.fontFamilyCode,
+    background: "rgba(150, 150, 150, 0.1)",
+    border: "1px solid rgba(100, 100, 100, 0.2)",
+    borderRadius: 3
+  },
+  kbd: {
+    margin: "0 0.2em",
+    paddingInline: "0.4em",
+    paddingBlock: "0.15em 0.1em",
+    fontSize: "90%",
+    fontFamily: token2.fontFamilyCode,
+    background: "rgba(150, 150, 150, 0.06)",
+    border: "1px solid rgba(100, 100, 100, 0.2)",
+    borderBottomWidth: 2,
+    borderRadius: 3
+  },
+  mark: {
+    padding: 0,
+    // FIXME hardcode in v4
+    backgroundColor: gold[2]
+  },
+  "u, ins": {
+    textDecoration: "underline",
+    textDecorationSkipInk: "auto"
+  },
+  "s, del": {
+    textDecoration: "line-through"
+  },
+  strong: {
+    fontWeight: 600
+  },
+  // list
+  "ul, ol": {
+    marginInline: 0,
+    marginBlock: "0 1em",
+    padding: 0,
+    li: {
+      marginInline: "20px 0",
+      marginBlock: 0,
+      paddingInline: "4px 0",
+      paddingBlock: 0
+    }
+  },
+  ul: {
+    listStyleType: "circle",
+    ul: {
+      listStyleType: "disc"
+    }
+  },
+  ol: {
+    listStyleType: "decimal"
+  },
+  // pre & block
+  "pre, blockquote": {
+    margin: "1em 0"
+  },
+  pre: {
+    padding: "0.4em 0.6em",
+    whiteSpace: "pre-wrap",
+    wordWrap: "break-word",
+    background: "rgba(150, 150, 150, 0.1)",
+    border: "1px solid rgba(100, 100, 100, 0.2)",
+    borderRadius: 3,
+    fontFamily: token2.fontFamilyCode,
+    // Compatible for marked
+    code: {
+      display: "inline",
+      margin: 0,
+      padding: 0,
+      fontSize: "inherit",
+      fontFamily: "inherit",
+      background: "transparent",
+      border: 0
+    }
+  },
+  blockquote: {
+    paddingInline: "0.6em 0",
+    paddingBlock: 0,
+    borderInlineStart: "4px solid rgba(100, 100, 100, 0.2)",
+    opacity: 0.85
+  }
+});
+const getEditableStyles = (token2) => {
+  const {
+    componentCls,
+    paddingSM
+  } = token2;
+  const inputShift = paddingSM;
+  return {
+    "&-edit-content": {
+      position: "relative",
+      "div&": {
+        insetInlineStart: token2.calc(token2.paddingSM).mul(-1).equal(),
+        marginTop: token2.calc(inputShift).mul(-1).equal(),
+        marginBottom: `calc(1em - ${unit$1(inputShift)})`
+      },
+      [`${componentCls}-edit-content-confirm`]: {
+        position: "absolute",
+        insetInlineEnd: token2.calc(token2.marginXS).add(2).equal(),
+        insetBlockEnd: token2.marginXS,
+        color: token2.colorTextDescription,
+        // default style
+        fontWeight: "normal",
+        fontSize: token2.fontSize,
+        fontStyle: "normal",
+        pointerEvents: "none"
+      },
+      textarea: {
+        margin: "0!important",
+        // Fix Editable Textarea flash in Firefox
+        MozTransition: "none",
+        height: "1em"
+      }
+    }
+  };
+};
+const getCopyableStyles = (token2) => ({
+  [`${token2.componentCls}-copy-success`]: {
+    [`
+    &,
+    &:hover,
+    &:focus`]: {
+      color: token2.colorSuccess
+    }
+  },
+  [`${token2.componentCls}-copy-icon-only`]: {
+    marginInlineStart: 0
+  }
+});
+const getEllipsisStyles = () => ({
+  [`
+  a&-ellipsis,
+  span&-ellipsis
+  `]: {
+    display: "inline-block",
+    maxWidth: "100%"
+  },
+  "&-single-line": {
+    whiteSpace: "nowrap"
+  },
+  "&-ellipsis-single-line": {
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    // https://blog.csdn.net/iefreer/article/details/50421025
+    "a&, span&": {
+      verticalAlign: "bottom"
+    },
+    "> code": {
+      paddingBlock: 0,
+      maxWidth: "calc(100% - 1.2em)",
+      display: "inline-block",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      verticalAlign: "bottom",
+      // https://github.com/ant-design/ant-design/issues/45953
+      boxSizing: "content-box"
+    }
+  },
+  "&-ellipsis-multiple-line": {
+    display: "-webkit-box",
+    overflow: "hidden",
+    WebkitLineClamp: 3,
+    WebkitBoxOrient: "vertical"
+  }
+});
+const genTypographyStyle = (token2) => {
+  const {
+    componentCls,
+    titleMarginTop
+  } = token2;
+  return {
+    [componentCls]: Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({
+      color: token2.colorText,
+      wordBreak: "break-word",
+      lineHeight: token2.lineHeight,
+      [`&${componentCls}-secondary`]: {
+        color: token2.colorTextDescription
+      },
+      [`&${componentCls}-success`]: {
+        color: token2.colorSuccess
+      },
+      [`&${componentCls}-warning`]: {
+        color: token2.colorWarning
+      },
+      [`&${componentCls}-danger`]: {
+        color: token2.colorError,
+        "a&:active, a&:focus": {
+          color: token2.colorErrorActive
+        },
+        "a&:hover": {
+          color: token2.colorErrorHover
+        }
+      },
+      [`&${componentCls}-disabled`]: {
+        color: token2.colorTextDisabled,
+        cursor: "not-allowed",
+        userSelect: "none"
+      },
+      [`
+        div&,
+        p
+      `]: {
+        marginBottom: "1em"
+      }
+    }, getTitleStyles(token2)), {
+      [`
+      & + h1${componentCls},
+      & + h2${componentCls},
+      & + h3${componentCls},
+      & + h4${componentCls},
+      & + h5${componentCls}
+      `]: {
+        marginTop: titleMarginTop
+      },
+      [`
+      div,
+      ul,
+      li,
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5`]: {
+        [`
+        + h1,
+        + h2,
+        + h3,
+        + h4,
+        + h5
+        `]: {
+          marginTop: titleMarginTop
+        }
+      }
+    }), getResetStyles(token2)), getLinkStyles(token2)), {
+      // Operation
+      [`
+        ${componentCls}-expand,
+        ${componentCls}-collapse,
+        ${componentCls}-edit,
+        ${componentCls}-copy
+      `]: Object.assign(Object.assign({}, operationUnit(token2)), {
+        marginInlineStart: token2.marginXXS
+      })
+    }), getEditableStyles(token2)), getCopyableStyles(token2)), getEllipsisStyles()), {
+      "&-rtl": {
+        direction: "rtl"
+      }
+    })
+  };
+};
+const prepareComponentToken = () => ({
+  titleMarginTop: "1.2em",
+  titleMarginBottom: "0.5em"
+});
+const useStyle = genStyleHooks("Typography", (token2) => [genTypographyStyle(token2)], prepareComponentToken);
+const Editable = (props) => {
+  const {
+    prefixCls,
+    "aria-label": ariaLabel,
+    className,
+    style: style2,
+    direction,
+    maxLength,
+    autoSize = true,
+    value,
+    onSave,
+    onCancel,
+    onEnd,
+    component,
+    enterIcon = /* @__PURE__ */ reactExports.createElement(RefIcon$1, null)
+  } = props;
+  const ref = reactExports.useRef(null);
+  const inComposition = reactExports.useRef(false);
+  const lastKeyCode = reactExports.useRef();
+  const [current, setCurrent] = reactExports.useState(value);
+  reactExports.useEffect(() => {
+    setCurrent(value);
+  }, [value]);
+  reactExports.useEffect(() => {
+    if (ref.current && ref.current.resizableTextArea) {
+      const {
+        textArea
+      } = ref.current.resizableTextArea;
+      textArea.focus();
+      const {
+        length: length2
+      } = textArea.value;
+      textArea.setSelectionRange(length2, length2);
+    }
+  }, []);
+  const onChange = (_ref) => {
+    let {
+      target
+    } = _ref;
+    setCurrent(target.value.replace(/[\n\r]/g, ""));
+  };
+  const onCompositionStart = () => {
+    inComposition.current = true;
+  };
+  const onCompositionEnd = () => {
+    inComposition.current = false;
+  };
+  const onKeyDown = (_ref2) => {
+    let {
+      keyCode
+    } = _ref2;
+    if (inComposition.current)
+      return;
+    lastKeyCode.current = keyCode;
+  };
+  const confirmChange = () => {
+    onSave(current.trim());
+  };
+  const onKeyUp = (_ref3) => {
+    let {
+      keyCode,
+      ctrlKey,
+      altKey,
+      metaKey,
+      shiftKey
+    } = _ref3;
+    if (lastKeyCode.current === keyCode && !inComposition.current && !ctrlKey && !altKey && !metaKey && !shiftKey) {
+      if (keyCode === KeyCode.ENTER) {
+        confirmChange();
+        onEnd === null || onEnd === void 0 ? void 0 : onEnd();
+      } else if (keyCode === KeyCode.ESC) {
+        onCancel();
+      }
+    }
+  };
+  const onBlur = () => {
+    confirmChange();
+  };
+  const textClassName = component ? `${prefixCls}-${component}` : "";
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const textAreaClassName = classNames(prefixCls, `${prefixCls}-edit-content`, {
+    [`${prefixCls}-rtl`]: direction === "rtl"
+  }, className, textClassName, hashId, cssVarCls);
+  return wrapCSSVar(/* @__PURE__ */ reactExports.createElement("div", {
+    className: textAreaClassName,
+    style: style2
+  }, /* @__PURE__ */ reactExports.createElement(TextArea, {
+    ref,
+    maxLength,
+    value: current,
+    onChange,
+    onKeyDown,
+    onKeyUp,
+    onCompositionStart,
+    onCompositionEnd,
+    onBlur,
+    "aria-label": ariaLabel,
+    rows: 1,
+    autoSize
+  }), enterIcon !== null ? cloneElement(enterIcon, {
+    className: `${prefixCls}-edit-content-confirm`
+  }) : null));
+};
+var toggleSelection = function() {
+  var selection = document.getSelection();
+  if (!selection.rangeCount) {
+    return function() {
+    };
+  }
+  var active = document.activeElement;
+  var ranges = [];
+  for (var i = 0; i < selection.rangeCount; i++) {
+    ranges.push(selection.getRangeAt(i));
+  }
+  switch (active.tagName.toUpperCase()) {
+    case "INPUT":
+    case "TEXTAREA":
+      active.blur();
+      break;
+    default:
+      active = null;
+      break;
+  }
+  selection.removeAllRanges();
+  return function() {
+    selection.type === "Caret" && selection.removeAllRanges();
+    if (!selection.rangeCount) {
+      ranges.forEach(function(range3) {
+        selection.addRange(range3);
+      });
+    }
+    active && active.focus();
+  };
+};
+var deselectCurrent = toggleSelection;
+var clipboardToIE11Formatting = {
+  "text/plain": "Text",
+  "text/html": "Url",
+  "default": "Text"
+};
+var defaultMessage = "Copy to clipboard: #{key}, Enter";
+function format(message) {
+  var copyKey = (/mac os x/i.test(navigator.userAgent) ? "⌘" : "Ctrl") + "+C";
+  return message.replace(/#{\s*key\s*}/g, copyKey);
+}
+function copy(text, options) {
+  var debug, message, reselectPrevious, range3, selection, mark, success = false;
+  if (!options) {
+    options = {};
+  }
+  debug = options.debug || false;
+  try {
+    reselectPrevious = deselectCurrent();
+    range3 = document.createRange();
+    selection = document.getSelection();
+    mark = document.createElement("span");
+    mark.textContent = text;
+    mark.ariaHidden = "true";
+    mark.style.all = "unset";
+    mark.style.position = "fixed";
+    mark.style.top = 0;
+    mark.style.clip = "rect(0, 0, 0, 0)";
+    mark.style.whiteSpace = "pre";
+    mark.style.webkitUserSelect = "text";
+    mark.style.MozUserSelect = "text";
+    mark.style.msUserSelect = "text";
+    mark.style.userSelect = "text";
+    mark.addEventListener("copy", function(e2) {
+      e2.stopPropagation();
+      if (options.format) {
+        e2.preventDefault();
+        if (typeof e2.clipboardData === "undefined") {
+          debug && console.warn("unable to use e.clipboardData");
+          debug && console.warn("trying IE specific stuff");
+          window.clipboardData.clearData();
+          var format2 = clipboardToIE11Formatting[options.format] || clipboardToIE11Formatting["default"];
+          window.clipboardData.setData(format2, text);
+        } else {
+          e2.clipboardData.clearData();
+          e2.clipboardData.setData(options.format, text);
+        }
+      }
+      if (options.onCopy) {
+        e2.preventDefault();
+        options.onCopy(e2.clipboardData);
+      }
+    });
+    document.body.appendChild(mark);
+    range3.selectNodeContents(mark);
+    selection.addRange(range3);
+    var successful = document.execCommand("copy");
+    if (!successful) {
+      throw new Error("copy command was unsuccessful");
+    }
+    success = true;
+  } catch (err) {
+    debug && console.error("unable to copy using execCommand: ", err);
+    debug && console.warn("trying IE specific stuff");
+    try {
+      window.clipboardData.setData(options.format || "text", text);
+      options.onCopy && options.onCopy(window.clipboardData);
+      success = true;
+    } catch (err2) {
+      debug && console.error("unable to copy using clipboardData: ", err2);
+      debug && console.error("falling back to prompt");
+      message = format("message" in options ? options.message : defaultMessage);
+      window.prompt(message, text);
+    }
+  } finally {
+    if (selection) {
+      if (typeof selection.removeRange == "function") {
+        selection.removeRange(range3);
+      } else {
+        selection.removeAllRanges();
+      }
+    }
+    if (mark) {
+      document.body.removeChild(mark);
+    }
+    reselectPrevious();
+  }
+  return success;
+}
+var copyToClipboard = copy;
+const copy$1 = /* @__PURE__ */ getDefaultExportFromCjs(copyToClipboard);
+var __awaiter = function(thisArg, _arguments, P2, generator) {
+  function adopt(value) {
+    return value instanceof P2 ? value : new P2(function(resolve) {
+      resolve(value);
+    });
+  }
+  return new (P2 || (P2 = Promise))(function(resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e2) {
+        reject(e2);
+      }
+    }
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e2) {
+        reject(e2);
+      }
+    }
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+const useCopyClick = (_ref) => {
+  let {
+    copyConfig,
+    children
+  } = _ref;
+  const [copied, setCopied] = reactExports.useState(false);
+  const [copyLoading, setCopyLoading] = reactExports.useState(false);
+  const copyIdRef = reactExports.useRef(null);
+  const cleanCopyId = () => {
+    if (copyIdRef.current) {
+      clearTimeout(copyIdRef.current);
+    }
+  };
+  const copyOptions = {};
+  if (copyConfig.format) {
+    copyOptions.format = copyConfig.format;
+  }
+  reactExports.useEffect(() => cleanCopyId, []);
+  const onClick = useEvent((e2) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    e2 === null || e2 === void 0 ? void 0 : e2.preventDefault();
+    e2 === null || e2 === void 0 ? void 0 : e2.stopPropagation();
+    setCopyLoading(true);
+    try {
+      const text = typeof copyConfig.text === "function" ? yield copyConfig.text() : copyConfig.text;
+      copy$1(text || String(children) || "", copyOptions);
+      setCopyLoading(false);
+      setCopied(true);
+      cleanCopyId();
+      copyIdRef.current = setTimeout(() => {
+        setCopied(false);
+      }, 3e3);
+      (_a = copyConfig.onCopy) === null || _a === void 0 ? void 0 : _a.call(copyConfig, e2);
+    } catch (error) {
+      setCopyLoading(false);
+      throw error;
+    }
+  }));
+  return {
+    copied,
+    copyLoading,
+    onClick
+  };
+};
+function useMergedConfig(propConfig, templateConfig) {
+  return reactExports.useMemo(() => {
+    const support = !!propConfig;
+    return [support, Object.assign(Object.assign({}, templateConfig), support && typeof propConfig === "object" ? propConfig : null)];
+  }, [propConfig]);
+}
+const useUpdatedEffect = (callback, conditions) => {
+  const mountRef = reactExports.useRef(false);
+  reactExports.useEffect(() => {
+    if (mountRef.current) {
+      callback();
+    } else {
+      mountRef.current = true;
+    }
+  }, conditions);
+};
+const usePrevious = (value) => {
+  const ref = reactExports.useRef();
+  reactExports.useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+};
+var __rest$4 = function(s, e2) {
+  var t2 = {};
+  for (var p2 in s)
+    if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
+      t2[p2] = s[p2];
+  if (s != null && typeof Object.getOwnPropertySymbols === "function")
+    for (var i = 0, p2 = Object.getOwnPropertySymbols(s); i < p2.length; i++) {
+      if (e2.indexOf(p2[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p2[i]))
+        t2[p2[i]] = s[p2[i]];
+    }
+  return t2;
+};
+const Typography$1 = /* @__PURE__ */ reactExports.forwardRef((props, ref) => {
+  const {
+    prefixCls: customizePrefixCls,
+    component: Component = "article",
+    className,
+    rootClassName,
+    setContentRef,
+    children,
+    direction: typographyDirection,
+    style: style2
+  } = props, restProps = __rest$4(props, ["prefixCls", "component", "className", "rootClassName", "setContentRef", "children", "direction", "style"]);
+  const {
+    getPrefixCls,
+    direction: contextDirection,
+    typography
+  } = reactExports.useContext(ConfigContext);
+  const direction = typographyDirection !== null && typographyDirection !== void 0 ? typographyDirection : contextDirection;
+  let mergedRef = ref;
+  if (setContentRef) {
+    mergedRef = composeRef(ref, setContentRef);
+  }
+  const prefixCls = getPrefixCls("typography", customizePrefixCls);
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const componentClassName = classNames(prefixCls, typography === null || typography === void 0 ? void 0 : typography.className, {
+    [`${prefixCls}-rtl`]: direction === "rtl"
+  }, className, rootClassName, hashId, cssVarCls);
+  const mergedStyle = Object.assign(Object.assign({}, typography === null || typography === void 0 ? void 0 : typography.style), style2);
+  return wrapCSSVar(
+    // @ts-expect-error: Expression produces a union type that is too complex to represent.
+    /* @__PURE__ */ reactExports.createElement(Component, Object.assign({
+      className: componentClassName,
+      style: mergedStyle,
+      ref: mergedRef
+    }, restProps), children)
+  );
+});
+var CopyOutlined$1 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z" } }] }, "name": "copy", "theme": "outlined" };
+var CopyOutlined = function CopyOutlined2(props, ref) {
+  return /* @__PURE__ */ reactExports.createElement(Icon, _extends({}, props, {
+    ref,
+    icon: CopyOutlined$1
+  }));
+};
+var RefIcon = /* @__PURE__ */ reactExports.forwardRef(CopyOutlined);
+function toList(val) {
+  if (val === false) {
+    return [false, false];
+  }
+  return Array.isArray(val) ? val : [val];
+}
+function getNode(dom, defaultNode, needDom) {
+  if (dom === true || dom === void 0) {
+    return defaultNode;
+  }
+  return dom || needDom && defaultNode;
+}
+const CopyBtn = (props) => {
+  const {
+    prefixCls,
+    copied,
+    locale: locale2,
+    iconOnly,
+    tooltips,
+    icon,
+    loading: btnLoading,
+    tabIndex,
+    onCopy
+  } = props;
+  const tooltipNodes = toList(tooltips);
+  const iconNodes = toList(icon);
+  const {
+    copied: copiedText,
+    copy: copyText
+  } = locale2 !== null && locale2 !== void 0 ? locale2 : {};
+  const copyTitle = copied ? getNode(tooltipNodes[1], copiedText) : getNode(tooltipNodes[0], copyText);
+  const systemStr = copied ? copiedText : copyText;
+  const ariaLabel = typeof copyTitle === "string" ? copyTitle : systemStr;
+  return /* @__PURE__ */ reactExports.createElement(Tooltip2, {
+    key: "copy",
+    title: copyTitle
+  }, /* @__PURE__ */ reactExports.createElement(TransButton, {
+    className: classNames(`${prefixCls}-copy`, {
+      [`${prefixCls}-copy-success`]: copied,
+      [`${prefixCls}-copy-icon-only`]: iconOnly
+    }),
+    onClick: onCopy,
+    "aria-label": ariaLabel,
+    tabIndex
+  }, copied ? getNode(iconNodes[1], /* @__PURE__ */ reactExports.createElement(RefIcon$6, null), true) : getNode(iconNodes[0], btnLoading ? /* @__PURE__ */ reactExports.createElement(RefIcon$7, null) : /* @__PURE__ */ reactExports.createElement(RefIcon, null), true)));
+};
+const MeasureText = /* @__PURE__ */ reactExports.forwardRef((_ref, ref) => {
+  let {
+    style: style2,
+    children
+  } = _ref;
+  const spanRef = reactExports.useRef(null);
+  reactExports.useImperativeHandle(ref, () => ({
+    isExceed: () => {
+      const span = spanRef.current;
+      return span.scrollHeight > span.clientHeight;
+    },
+    getHeight: () => spanRef.current.clientHeight
+  }));
+  return /* @__PURE__ */ reactExports.createElement("span", {
+    "aria-hidden": true,
+    ref: spanRef,
+    style: Object.assign({
+      position: "fixed",
+      display: "block",
+      left: 0,
+      top: 0,
+      pointerEvents: "none",
+      backgroundColor: "rgba(255, 0, 0, 0.65)"
+    }, style2)
+  }, children);
+});
+function cuttable(node2) {
+  const type4 = typeof node2;
+  return type4 === "string" || type4 === "number";
+}
+function getNodesLen(nodeList) {
+  let totalLen = 0;
+  nodeList.forEach((node2) => {
+    if (cuttable(node2)) {
+      totalLen += String(node2).length;
+    } else {
+      totalLen += 1;
+    }
+  });
+  return totalLen;
+}
+function sliceNodes(nodeList, len) {
+  let currLen = 0;
+  const currentNodeList = [];
+  for (let i = 0; i < nodeList.length; i += 1) {
+    if (currLen === len) {
+      return currentNodeList;
+    }
+    const node2 = nodeList[i];
+    const canCut = cuttable(node2);
+    const nodeLen = canCut ? String(node2).length : 1;
+    const nextLen = currLen + nodeLen;
+    if (nextLen > len) {
+      const restLen = len - currLen;
+      currentNodeList.push(String(node2).slice(0, restLen));
+      return currentNodeList;
+    }
+    currentNodeList.push(node2);
+    currLen = nextLen;
+  }
+  return nodeList;
+}
+const STATUS_MEASURE_NONE = 0;
+const STATUS_MEASURE_START = 1;
+const STATUS_MEASURE_NEED_ELLIPSIS = 2;
+const STATUS_MEASURE_NO_NEED_ELLIPSIS = 3;
+const lineClipStyle = {
+  display: "-webkit-box",
+  overflow: "hidden",
+  WebkitBoxOrient: "vertical"
+};
+function EllipsisMeasure(props) {
+  const {
+    enableMeasure,
+    width,
+    text,
+    children,
+    rows,
+    expanded,
+    miscDeps,
+    onEllipsis
+  } = props;
+  const nodeList = reactExports.useMemo(() => toArray$2(text), [text]);
+  const nodeLen = reactExports.useMemo(() => getNodesLen(nodeList), [text]);
+  const fullContent = reactExports.useMemo(() => children(nodeList, false), [text]);
+  const [ellipsisCutIndex, setEllipsisCutIndex] = reactExports.useState(null);
+  const cutMidRef = reactExports.useRef(null);
+  const needEllipsisRef = reactExports.useRef(null);
+  const descRowsEllipsisRef = reactExports.useRef(null);
+  const symbolRowEllipsisRef = reactExports.useRef(null);
+  const [canEllipsis, setCanEllipsis] = reactExports.useState(false);
+  const [needEllipsis, setNeedEllipsis] = reactExports.useState(STATUS_MEASURE_NONE);
+  const [ellipsisHeight, setEllipsisHeight] = reactExports.useState(0);
+  useLayoutEffect(() => {
+    if (enableMeasure && width && nodeLen) {
+      setNeedEllipsis(STATUS_MEASURE_START);
+    } else {
+      setNeedEllipsis(STATUS_MEASURE_NONE);
+    }
+  }, [width, text, rows, enableMeasure, nodeList]);
+  useLayoutEffect(() => {
+    var _a, _b, _c, _d;
+    if (needEllipsis === STATUS_MEASURE_START) {
+      const isOverflow = !!((_a = needEllipsisRef.current) === null || _a === void 0 ? void 0 : _a.isExceed());
+      setNeedEllipsis(isOverflow ? STATUS_MEASURE_NEED_ELLIPSIS : STATUS_MEASURE_NO_NEED_ELLIPSIS);
+      setEllipsisCutIndex(isOverflow ? [0, nodeLen] : null);
+      setCanEllipsis(isOverflow);
+      const baseRowsEllipsisHeight = ((_b = needEllipsisRef.current) === null || _b === void 0 ? void 0 : _b.getHeight()) || 0;
+      const descRowsEllipsisHeight = rows === 1 ? 0 : ((_c = descRowsEllipsisRef.current) === null || _c === void 0 ? void 0 : _c.getHeight()) || 0;
+      const symbolRowEllipsisHeight = ((_d = symbolRowEllipsisRef.current) === null || _d === void 0 ? void 0 : _d.getHeight()) || 0;
+      const rowsWithEllipsisHeight = descRowsEllipsisHeight + symbolRowEllipsisHeight;
+      const maxRowsHeight = Math.max(baseRowsEllipsisHeight, rowsWithEllipsisHeight);
+      setEllipsisHeight(maxRowsHeight + 1);
+      onEllipsis(isOverflow);
+    }
+  }, [needEllipsis]);
+  const cutMidIndex = ellipsisCutIndex ? Math.ceil((ellipsisCutIndex[0] + ellipsisCutIndex[1]) / 2) : 0;
+  useLayoutEffect(() => {
+    var _a;
+    const [minIndex, maxIndex] = ellipsisCutIndex || [0, 0];
+    if (minIndex !== maxIndex) {
+      const midHeight = ((_a = cutMidRef.current) === null || _a === void 0 ? void 0 : _a.getHeight()) || 0;
+      const isOverflow = midHeight > ellipsisHeight;
+      let targetMidIndex = cutMidIndex;
+      if (maxIndex - minIndex === 1) {
+        targetMidIndex = isOverflow ? minIndex : maxIndex;
+      }
+      if (isOverflow) {
+        setEllipsisCutIndex([minIndex, targetMidIndex]);
+      } else {
+        setEllipsisCutIndex([targetMidIndex, maxIndex]);
+      }
+    }
+  }, [ellipsisCutIndex, cutMidIndex]);
+  const finalContent = reactExports.useMemo(() => {
+    if (needEllipsis !== STATUS_MEASURE_NEED_ELLIPSIS || !ellipsisCutIndex || ellipsisCutIndex[0] !== ellipsisCutIndex[1]) {
+      const content = children(nodeList, false);
+      if (needEllipsis !== STATUS_MEASURE_NO_NEED_ELLIPSIS && needEllipsis !== STATUS_MEASURE_NONE) {
+        return /* @__PURE__ */ reactExports.createElement("span", {
+          style: Object.assign(Object.assign({}, lineClipStyle), {
+            WebkitLineClamp: rows
+          })
+        }, content);
+      }
+      return content;
+    }
+    return children(expanded ? nodeList : sliceNodes(nodeList, ellipsisCutIndex[0]), canEllipsis);
+  }, [expanded, needEllipsis, ellipsisCutIndex, nodeList].concat(_toConsumableArray(miscDeps)));
+  const measureStyle = {
+    width,
+    whiteSpace: "normal",
+    margin: 0,
+    padding: 0
+  };
+  return /* @__PURE__ */ reactExports.createElement(reactExports.Fragment, null, finalContent, needEllipsis === STATUS_MEASURE_START && /* @__PURE__ */ reactExports.createElement(reactExports.Fragment, null, /* @__PURE__ */ reactExports.createElement(MeasureText, {
+    style: Object.assign(Object.assign(Object.assign({}, measureStyle), lineClipStyle), {
+      WebkitLineClamp: rows
+    }),
+    ref: needEllipsisRef
+  }, fullContent), /* @__PURE__ */ reactExports.createElement(MeasureText, {
+    style: Object.assign(Object.assign(Object.assign({}, measureStyle), lineClipStyle), {
+      WebkitLineClamp: rows - 1
+    }),
+    ref: descRowsEllipsisRef
+  }, fullContent), /* @__PURE__ */ reactExports.createElement(MeasureText, {
+    style: Object.assign(Object.assign(Object.assign({}, measureStyle), lineClipStyle), {
+      WebkitLineClamp: 1
+    }),
+    ref: symbolRowEllipsisRef
+  }, children([], true))), needEllipsis === STATUS_MEASURE_NEED_ELLIPSIS && ellipsisCutIndex && ellipsisCutIndex[0] !== ellipsisCutIndex[1] && /* @__PURE__ */ reactExports.createElement(MeasureText, {
+    style: Object.assign(Object.assign({}, measureStyle), {
+      top: 400
+    }),
+    ref: cutMidRef
+  }, children(sliceNodes(nodeList, cutMidIndex), true)));
+}
+const EllipsisTooltip = (_ref) => {
+  let {
+    enableEllipsis,
+    isEllipsis,
+    children,
+    tooltipProps
+  } = _ref;
+  if (!(tooltipProps === null || tooltipProps === void 0 ? void 0 : tooltipProps.title) || !enableEllipsis) {
+    return children;
+  }
+  return /* @__PURE__ */ reactExports.createElement(Tooltip2, Object.assign({
+    open: isEllipsis ? void 0 : false
+  }, tooltipProps), children);
+};
+var __rest$3 = function(s, e2) {
+  var t2 = {};
+  for (var p2 in s)
+    if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
+      t2[p2] = s[p2];
+  if (s != null && typeof Object.getOwnPropertySymbols === "function")
+    for (var i = 0, p2 = Object.getOwnPropertySymbols(s); i < p2.length; i++) {
+      if (e2.indexOf(p2[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p2[i]))
+        t2[p2[i]] = s[p2[i]];
+    }
+  return t2;
+};
+function wrapperDecorations(_ref, content) {
+  let {
+    mark,
+    code,
+    underline,
+    delete: del,
+    strong,
+    keyboard,
+    italic
+  } = _ref;
+  let currentContent = content;
+  function wrap(tag, needed) {
+    if (!needed) {
+      return;
+    }
+    currentContent = /* @__PURE__ */ reactExports.createElement(tag, {}, currentContent);
+  }
+  wrap("strong", strong);
+  wrap("u", underline);
+  wrap("del", del);
+  wrap("code", code);
+  wrap("mark", mark);
+  wrap("kbd", keyboard);
+  wrap("i", italic);
+  return currentContent;
+}
+const ELLIPSIS_STR = "...";
+const Base = /* @__PURE__ */ reactExports.forwardRef((props, ref) => {
+  var _a, _b, _c;
+  const {
+    prefixCls: customizePrefixCls,
+    className,
+    style: style2,
+    type: type4,
+    disabled,
+    children,
+    ellipsis,
+    editable,
+    copyable,
+    component,
+    title
+  } = props, restProps = __rest$3(props, ["prefixCls", "className", "style", "type", "disabled", "children", "ellipsis", "editable", "copyable", "component", "title"]);
+  const {
+    getPrefixCls,
+    direction
+  } = reactExports.useContext(ConfigContext);
+  const [textLocale] = useLocale("Text");
+  const typographyRef = reactExports.useRef(null);
+  const editIconRef = reactExports.useRef(null);
+  const prefixCls = getPrefixCls("typography", customizePrefixCls);
+  const textProps = omit(restProps, ["mark", "code", "delete", "underline", "strong", "keyboard", "italic"]);
+  const [enableEdit, editConfig] = useMergedConfig(editable);
+  const [editing, setEditing] = useMergedState(false, {
+    value: editConfig.editing
+  });
+  const {
+    triggerType = ["icon"]
+  } = editConfig;
+  const triggerEdit = (edit) => {
+    var _a2;
+    if (edit) {
+      (_a2 = editConfig.onStart) === null || _a2 === void 0 ? void 0 : _a2.call(editConfig);
+    }
+    setEditing(edit);
+  };
+  const prevEditing = usePrevious(editing);
+  useUpdatedEffect(() => {
+    var _a2;
+    if (!editing && prevEditing) {
+      (_a2 = editIconRef.current) === null || _a2 === void 0 ? void 0 : _a2.focus();
+    }
+  }, [editing]);
+  const onEditClick = (e2) => {
+    e2 === null || e2 === void 0 ? void 0 : e2.preventDefault();
+    triggerEdit(true);
+  };
+  const onEditChange = (value) => {
+    var _a2;
+    (_a2 = editConfig.onChange) === null || _a2 === void 0 ? void 0 : _a2.call(editConfig, value);
+    triggerEdit(false);
+  };
+  const onEditCancel = () => {
+    var _a2;
+    (_a2 = editConfig.onCancel) === null || _a2 === void 0 ? void 0 : _a2.call(editConfig);
+    triggerEdit(false);
+  };
+  const [enableCopy, copyConfig] = useMergedConfig(copyable);
+  const {
+    copied,
+    copyLoading,
+    onClick: onCopyClick
+  } = useCopyClick({
+    copyConfig,
+    children
+  });
+  const [isLineClampSupport, setIsLineClampSupport] = reactExports.useState(false);
+  const [isTextOverflowSupport, setIsTextOverflowSupport] = reactExports.useState(false);
+  const [isJsEllipsis, setIsJsEllipsis] = reactExports.useState(false);
+  const [isNativeEllipsis, setIsNativeEllipsis] = reactExports.useState(false);
+  const [isNativeVisible, setIsNativeVisible] = reactExports.useState(true);
+  const [enableEllipsis, ellipsisConfig] = useMergedConfig(ellipsis, {
+    expandable: false,
+    symbol: (isExpanded) => isExpanded ? textLocale === null || textLocale === void 0 ? void 0 : textLocale.collapse : textLocale === null || textLocale === void 0 ? void 0 : textLocale.expand
+  });
+  const [expanded, setExpanded] = useMergedState(ellipsisConfig.defaultExpanded || false, {
+    value: ellipsisConfig.expanded
+  });
+  const mergedEnableEllipsis = enableEllipsis && (!expanded || ellipsisConfig.expandable === "collapsible");
+  const {
+    rows = 1
+  } = ellipsisConfig;
+  const needMeasureEllipsis = reactExports.useMemo(() => (
+    // Disable ellipsis
+    mergedEnableEllipsis && // Provide suffix
+    (ellipsisConfig.suffix !== void 0 || ellipsisConfig.onEllipsis || // Can't use css ellipsis since we need to provide the place for button
+    ellipsisConfig.expandable || enableEdit || enableCopy)
+  ), [mergedEnableEllipsis, ellipsisConfig, enableEdit, enableCopy]);
+  useLayoutEffect(() => {
+    if (enableEllipsis && !needMeasureEllipsis) {
+      setIsLineClampSupport(isStyleSupport("webkitLineClamp"));
+      setIsTextOverflowSupport(isStyleSupport("textOverflow"));
+    }
+  }, [needMeasureEllipsis, enableEllipsis]);
+  const [cssEllipsis, setCssEllipsis] = reactExports.useState(mergedEnableEllipsis);
+  const canUseCssEllipsis = reactExports.useMemo(() => {
+    if (needMeasureEllipsis) {
+      return false;
+    }
+    if (rows === 1) {
+      return isTextOverflowSupport;
+    }
+    return isLineClampSupport;
+  }, [needMeasureEllipsis, isTextOverflowSupport, isLineClampSupport]);
+  useLayoutEffect(() => {
+    setCssEllipsis(canUseCssEllipsis && mergedEnableEllipsis);
+  }, [canUseCssEllipsis, mergedEnableEllipsis]);
+  const isMergedEllipsis = mergedEnableEllipsis && (cssEllipsis ? isNativeEllipsis : isJsEllipsis);
+  const cssTextOverflow = mergedEnableEllipsis && rows === 1 && cssEllipsis;
+  const cssLineClamp = mergedEnableEllipsis && rows > 1 && cssEllipsis;
+  const onExpandClick = (e2, info) => {
+    var _a2;
+    setExpanded(info.expanded);
+    (_a2 = ellipsisConfig.onExpand) === null || _a2 === void 0 ? void 0 : _a2.call(ellipsisConfig, e2, info);
+  };
+  const [ellipsisWidth, setEllipsisWidth] = reactExports.useState(0);
+  const onResize2 = (_ref2) => {
+    let {
+      offsetWidth
+    } = _ref2;
+    setEllipsisWidth(offsetWidth);
+  };
+  const onJsEllipsis = (jsEllipsis) => {
+    var _a2;
+    setIsJsEllipsis(jsEllipsis);
+    if (isJsEllipsis !== jsEllipsis) {
+      (_a2 = ellipsisConfig.onEllipsis) === null || _a2 === void 0 ? void 0 : _a2.call(ellipsisConfig, jsEllipsis);
+    }
+  };
+  reactExports.useEffect(() => {
+    const textEle = typographyRef.current;
+    if (enableEllipsis && cssEllipsis && textEle) {
+      const currentEllipsis = cssLineClamp ? textEle.offsetHeight < textEle.scrollHeight : textEle.offsetWidth < textEle.scrollWidth;
+      if (isNativeEllipsis !== currentEllipsis) {
+        setIsNativeEllipsis(currentEllipsis);
+      }
+    }
+  }, [enableEllipsis, cssEllipsis, children, cssLineClamp, isNativeVisible, ellipsisWidth]);
+  reactExports.useEffect(() => {
+    const textEle = typographyRef.current;
+    if (typeof IntersectionObserver === "undefined" || !textEle || !cssEllipsis || !mergedEnableEllipsis) {
+      return;
+    }
+    const observer = new IntersectionObserver(() => {
+      setIsNativeVisible(!!textEle.offsetParent);
+    });
+    observer.observe(textEle);
+    return () => {
+      observer.disconnect();
+    };
+  }, [cssEllipsis, mergedEnableEllipsis]);
+  let tooltipProps = {};
+  if (ellipsisConfig.tooltip === true) {
+    tooltipProps = {
+      title: (_a = editConfig.text) !== null && _a !== void 0 ? _a : children
+    };
+  } else if (/* @__PURE__ */ reactExports.isValidElement(ellipsisConfig.tooltip)) {
+    tooltipProps = {
+      title: ellipsisConfig.tooltip
+    };
+  } else if (typeof ellipsisConfig.tooltip === "object") {
+    tooltipProps = Object.assign({
+      title: (_b = editConfig.text) !== null && _b !== void 0 ? _b : children
+    }, ellipsisConfig.tooltip);
+  } else {
+    tooltipProps = {
+      title: ellipsisConfig.tooltip
+    };
+  }
+  const topAriaLabel = reactExports.useMemo(() => {
+    const isValid = (val) => ["string", "number"].includes(typeof val);
+    if (!enableEllipsis || cssEllipsis) {
+      return void 0;
+    }
+    if (isValid(editConfig.text)) {
+      return editConfig.text;
+    }
+    if (isValid(children)) {
+      return children;
+    }
+    if (isValid(title)) {
+      return title;
+    }
+    if (isValid(tooltipProps.title)) {
+      return tooltipProps.title;
+    }
+    return void 0;
+  }, [enableEllipsis, cssEllipsis, title, tooltipProps.title, isMergedEllipsis]);
+  if (editing) {
+    return /* @__PURE__ */ reactExports.createElement(Editable, {
+      value: (_c = editConfig.text) !== null && _c !== void 0 ? _c : typeof children === "string" ? children : "",
+      onSave: onEditChange,
+      onCancel: onEditCancel,
+      onEnd: editConfig.onEnd,
+      prefixCls,
+      className,
+      style: style2,
+      direction,
+      component,
+      maxLength: editConfig.maxLength,
+      autoSize: editConfig.autoSize,
+      enterIcon: editConfig.enterIcon
+    });
+  }
+  const renderExpand = () => {
+    const {
+      expandable,
+      symbol
+    } = ellipsisConfig;
+    if (!expandable) {
+      return null;
+    }
+    if (expanded && expandable !== "collapsible") {
+      return null;
+    }
+    return /* @__PURE__ */ reactExports.createElement("a", {
+      key: "expand",
+      className: `${prefixCls}-${expanded ? "collapse" : "expand"}`,
+      onClick: (e2) => onExpandClick(e2, {
+        expanded: !expanded
+      }),
+      "aria-label": expanded ? textLocale.collapse : textLocale === null || textLocale === void 0 ? void 0 : textLocale.expand
+    }, typeof symbol === "function" ? symbol(expanded) : symbol);
+  };
+  const renderEdit = () => {
+    if (!enableEdit) {
+      return;
+    }
+    const {
+      icon,
+      tooltip,
+      tabIndex
+    } = editConfig;
+    const editTitle = toArray$2(tooltip)[0] || (textLocale === null || textLocale === void 0 ? void 0 : textLocale.edit);
+    const ariaLabel = typeof editTitle === "string" ? editTitle : "";
+    return triggerType.includes("icon") ? /* @__PURE__ */ reactExports.createElement(Tooltip2, {
+      key: "edit",
+      title: tooltip === false ? "" : editTitle
+    }, /* @__PURE__ */ reactExports.createElement(TransButton, {
+      ref: editIconRef,
+      className: `${prefixCls}-edit`,
+      onClick: onEditClick,
+      "aria-label": ariaLabel,
+      tabIndex
+    }, icon || /* @__PURE__ */ reactExports.createElement(RefIcon$2, {
+      role: "button"
+    }))) : null;
+  };
+  const renderCopy = () => {
+    if (!enableCopy) {
+      return null;
+    }
+    return /* @__PURE__ */ reactExports.createElement(CopyBtn, Object.assign({
+      key: "copy"
+    }, copyConfig, {
+      prefixCls,
+      copied,
+      locale: textLocale,
+      onCopy: onCopyClick,
+      loading: copyLoading,
+      iconOnly: children === null || children === void 0
+    }));
+  };
+  const renderOperations = (canEllipsis) => [
+    // (renderExpanded || ellipsisConfig.collapsible) && renderExpand(),
+    canEllipsis && renderExpand(),
+    renderEdit(),
+    renderCopy()
+  ];
+  const renderEllipsis = (canEllipsis) => [canEllipsis && !expanded && /* @__PURE__ */ reactExports.createElement("span", {
+    "aria-hidden": true,
+    key: "ellipsis"
+  }, ELLIPSIS_STR), ellipsisConfig.suffix, renderOperations(canEllipsis)];
+  return /* @__PURE__ */ reactExports.createElement(RefResizeObserver, {
+    onResize: onResize2,
+    disabled: !mergedEnableEllipsis
+  }, (resizeRef) => /* @__PURE__ */ reactExports.createElement(EllipsisTooltip, {
+    tooltipProps,
+    enableEllipsis: mergedEnableEllipsis,
+    isEllipsis: isMergedEllipsis
+  }, /* @__PURE__ */ reactExports.createElement(Typography$1, Object.assign({
+    className: classNames({
+      [`${prefixCls}-${type4}`]: type4,
+      [`${prefixCls}-disabled`]: disabled,
+      [`${prefixCls}-ellipsis`]: enableEllipsis,
+      [`${prefixCls}-single-line`]: mergedEnableEllipsis && rows === 1 && !expanded,
+      [`${prefixCls}-ellipsis-single-line`]: cssTextOverflow,
+      [`${prefixCls}-ellipsis-multiple-line`]: cssLineClamp
+    }, className),
+    prefixCls: customizePrefixCls,
+    style: Object.assign(Object.assign({}, style2), {
+      WebkitLineClamp: cssLineClamp ? rows : void 0
+    }),
+    component,
+    ref: composeRef(resizeRef, typographyRef, ref),
+    direction,
+    onClick: triggerType.includes("text") ? onEditClick : void 0,
+    "aria-label": topAriaLabel === null || topAriaLabel === void 0 ? void 0 : topAriaLabel.toString(),
+    title
+  }, textProps), /* @__PURE__ */ reactExports.createElement(EllipsisMeasure, {
+    enableMeasure: mergedEnableEllipsis && !cssEllipsis,
+    text: children,
+    rows,
+    width: ellipsisWidth,
+    onEllipsis: onJsEllipsis,
+    expanded,
+    miscDeps: [copied, expanded, copyLoading, enableEdit, enableCopy]
+  }, (node2, canEllipsis) => wrapperDecorations(props, /* @__PURE__ */ reactExports.createElement(reactExports.Fragment, null, node2.length > 0 && canEllipsis && !expanded && topAriaLabel ? /* @__PURE__ */ reactExports.createElement("span", {
+    key: "show-content",
+    "aria-hidden": true
+  }, node2) : node2, renderEllipsis(canEllipsis)))))));
+});
+var __rest$2 = function(s, e2) {
+  var t2 = {};
+  for (var p2 in s)
+    if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
+      t2[p2] = s[p2];
+  if (s != null && typeof Object.getOwnPropertySymbols === "function")
+    for (var i = 0, p2 = Object.getOwnPropertySymbols(s); i < p2.length; i++) {
+      if (e2.indexOf(p2[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p2[i]))
+        t2[p2[i]] = s[p2[i]];
+    }
+  return t2;
+};
+const Link = /* @__PURE__ */ reactExports.forwardRef((_a, ref) => {
+  var {
+    ellipsis,
+    rel
+  } = _a, restProps = __rest$2(_a, ["ellipsis", "rel"]);
+  const mergedProps = Object.assign(Object.assign({}, restProps), {
+    rel: rel === void 0 && restProps.target === "_blank" ? "noopener noreferrer" : rel
+  });
+  delete mergedProps.navigate;
+  return /* @__PURE__ */ reactExports.createElement(Base, Object.assign({}, mergedProps, {
+    ref,
+    ellipsis: !!ellipsis,
+    component: "a"
+  }));
+});
+const Paragraph = /* @__PURE__ */ reactExports.forwardRef((props, ref) => /* @__PURE__ */ reactExports.createElement(Base, Object.assign({
+  ref
+}, props, {
+  component: "div"
+})));
+var __rest$1 = function(s, e2) {
+  var t2 = {};
+  for (var p2 in s)
+    if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
+      t2[p2] = s[p2];
+  if (s != null && typeof Object.getOwnPropertySymbols === "function")
+    for (var i = 0, p2 = Object.getOwnPropertySymbols(s); i < p2.length; i++) {
+      if (e2.indexOf(p2[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p2[i]))
+        t2[p2[i]] = s[p2[i]];
+    }
+  return t2;
+};
+const Text = (_a, ref) => {
+  var {
+    ellipsis
+  } = _a, restProps = __rest$1(_a, ["ellipsis"]);
+  const mergedEllipsis = reactExports.useMemo(() => {
+    if (ellipsis && typeof ellipsis === "object") {
+      return omit(ellipsis, ["expandable", "rows"]);
+    }
+    return ellipsis;
+  }, [ellipsis]);
+  return /* @__PURE__ */ reactExports.createElement(Base, Object.assign({
+    ref
+  }, restProps, {
+    ellipsis: mergedEllipsis,
+    component: "span"
+  }));
+};
+const Text$1 = /* @__PURE__ */ reactExports.forwardRef(Text);
+var __rest = function(s, e2) {
+  var t2 = {};
+  for (var p2 in s)
+    if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
+      t2[p2] = s[p2];
+  if (s != null && typeof Object.getOwnPropertySymbols === "function")
+    for (var i = 0, p2 = Object.getOwnPropertySymbols(s); i < p2.length; i++) {
+      if (e2.indexOf(p2[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p2[i]))
+        t2[p2[i]] = s[p2[i]];
+    }
+  return t2;
+};
+const TITLE_ELE_LIST = [1, 2, 3, 4, 5];
+const Title = /* @__PURE__ */ reactExports.forwardRef((props, ref) => {
+  const {
+    level = 1
+  } = props, restProps = __rest(props, ["level"]);
+  let component;
+  if (TITLE_ELE_LIST.includes(level)) {
+    component = `h${level}`;
+  } else {
+    component = "h1";
+  }
+  return /* @__PURE__ */ reactExports.createElement(Base, Object.assign({
+    ref
+  }, restProps, {
+    component
+  }));
+});
+const Typography = Typography$1;
+Typography.Text = Text$1;
+Typography.Link = Link;
+Typography.Title = Title;
+Typography.Paragraph = Paragraph;
 function __read(o, n2) {
   var m2 = typeof Symbol === "function" && o[Symbol.iterator];
   if (!m2)
@@ -30512,15 +31585,15 @@ export {
   Divider as D,
   Input as I,
   Modal as M,
-  RefIcon$3 as R,
+  RefIcon$6 as R,
   Space as S,
   Tooltip2 as T,
-  useHover as a,
-  Spin as b,
+  Typography as a,
+  useMemoizedFn as b,
   useBoolean as c,
   Row as d,
   jsxRuntimeExports as j,
   mountDomRenderer as m,
   reactExports as r,
-  useMemoizedFn as u
+  useHover as u
 };

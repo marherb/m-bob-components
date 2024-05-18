@@ -1,5 +1,215 @@
-import { u as useMemoizedFn, j as jsxRuntimeExports, r as reactExports, a as useHover, B as Button, S as Space, T as Tooltip, M as Modal, b as Spin, c as useBoolean, R as RefIcon, I as Input, D as Divider, d as Row } from "./vendors-hlgHDHLT.js";
-const testPng = "" + new URL("test-BmZeV98H.png", import.meta.url).href;
+import { j as jsxRuntimeExports, T as Tooltip, S as Space, a as Typography, r as reactExports, u as useHover, M as Modal, b as useMemoizedFn, B as Button, c as useBoolean, R as RefIcon, I as Input, D as Divider, d as Row } from "./vendors-CdAMihPU.js";
+function CusTooltip(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    Tooltip,
+    {
+      overlayInnerStyle: {
+        background: "white",
+        borderRadius: "0.625rem",
+        padding: "0.625rem",
+        fontSize: "0.75rem",
+        fontWeight: 500,
+        lineHeight: "1.25rem",
+        color: "black",
+        letterSpacing: "0.025rem"
+      },
+      color: "white",
+      destroyTooltipOnHide: true,
+      ...props
+    }
+  );
+}
+const index_fixture$6 = /* @__PURE__ */ jsxRuntimeExports.jsx(Space, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CusTooltip, { title: "Lorem ipsum dolor.", open: true, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Typography.Title, { style: { color: "white" }, children: "tooltip" }) }) });
+const fixture0 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: index_fixture$6
+}, Symbol.toStringTag, { value: "Module" }));
+const fontSize = {
+  b1: 1,
+  b2: 0.875
+};
+const lineHeight = {
+  b1: 1.5,
+  b2: 1.375
+};
+const fontWeights = {
+  regular: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700
+};
+function CusText({
+  children,
+  style = {},
+  size = "b1",
+  outline = "regular"
+}) {
+  const ref = reactExports.useRef(null);
+  const isHovering = useHover(ref);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "span",
+    {
+      ref,
+      style: {
+        fontSize: fontSize[size] + "rem",
+        lineHeight: lineHeight[size],
+        color: "#FFFFFFE0",
+        textOverflow: "ellipsis",
+        overflow: "hidden",
+        fontStyle: "normal",
+        fontWeight: fontWeights[outline],
+        textDecoration: isHovering ? "underline" : "none",
+        cursor: "pointer",
+        ...style
+      },
+      children
+    }
+  );
+}
+const index_fixture$5 = /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { direction: "vertical", children: [
+  /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CusText, { size: "b1", children: "size=b1" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CusText, { size: "b2", children: "size=b2" })
+  ] }),
+  /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CusText, { outline: "regular", children: "outline=regular" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CusText, { outline: "medium", children: "outline=medium" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CusText, { outline: "semibold", children: "outline=semibold" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CusText, { outline: "bold", children: "outline=bold" })
+  ] })
+] });
+const fixture1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: index_fixture$5
+}, Symbol.toStringTag, { value: "Module" }));
+function CusModal(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    Modal,
+    {
+      footer: null,
+      width: "min(36.75rem,calc(100vw - 9.25rem))",
+      centered: true,
+      maskClosable: props.closable === false,
+      closable: false,
+      styles: {
+        mask: {
+          backdropFilter: "blur(22.5px)"
+        },
+        content: {
+          borderRadius: "1.5rem",
+          padding: "0",
+          backgroundColor: "#ffffff1f",
+          backdropFilter: "blur(100px)",
+          border: "1px solid #ffffff3e"
+        }
+      },
+      ...props,
+      children: [
+        props.closable !== false && /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            onClick: props.onCancel,
+            style: {
+              width: "3rem",
+              height: "3rem",
+              borderRadius: "0.75rem",
+              border: "1px solid #ffffff3e",
+              backgroundColor: "#ffffff1f",
+              cursor: "pointer",
+              position: "absolute",
+              top: "0",
+              right: "-3.75rem",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            },
+            children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "svg",
+              {
+                width: "1.5rem",
+                height: "1.5rem",
+                viewBox: "0 0 24 24",
+                fill: "none",
+                xmlns: "http://www.w3.org/2000/svg",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "path",
+                    {
+                      fillRule: "evenodd",
+                      clipRule: "evenodd",
+                      d: "M4.92825 19.0711C4.49434 18.6372 4.49434 17.9336 4.92825 17.4997L17.499 4.92894C17.933 4.49502 18.6365 4.49502 19.0704 4.92894C19.5043 5.36286 19.5043 6.06637 19.0704 6.50029L6.4996 19.0711C6.06568 19.505 5.36217 19.505 4.92825 19.0711Z",
+                      fill: "white",
+                      fillOpacity: "0.88"
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "path",
+                    {
+                      "fill-rule": "evenodd",
+                      "clip-rule": "evenodd",
+                      d: "M4.92825 4.92893C5.36217 4.49501 6.06568 4.49501 6.4996 4.92893L19.0704 17.4997C19.5043 17.9336 19.5043 18.6371 19.0704 19.0711C18.6365 19.505 17.933 19.505 17.499 19.0711L4.92825 6.50027C4.49434 6.06636 4.49434 5.36284 4.92825 4.92893Z",
+                      fill: "white",
+                      "fill-opacity": "0.88"
+                    }
+                  )
+                ]
+              }
+            )
+          }
+        ),
+        props.onBack && /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            onClick: props.onBack,
+            style: {
+              width: "3rem",
+              height: "3rem",
+              borderRadius: "0.75rem",
+              border: "1px solid #ffffff3e",
+              backgroundColor: "#ffffff1f",
+              cursor: "pointer",
+              position: "absolute",
+              top: "0",
+              left: "-3.75rem",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            },
+            children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "svg",
+              {
+                width: "1.5rem",
+                height: "1.5rem",
+                viewBox: "0 0 24 24",
+                fill: "none",
+                xmlns: "http://www.w3.org/2000/svg",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "path",
+                    {
+                      d: "M9.56945 18.82C9.37945 18.82 9.18945 18.75 9.03945 18.6L2.96945 12.53C2.67945 12.24 2.67945 11.76 2.96945 11.47L9.03945 5.4C9.32945 5.11 9.80945 5.11 10.0995 5.4C10.3895 5.69 10.3895 6.17 10.0995 6.46L4.55945 12L10.0995 17.54C10.3895 17.83 10.3895 18.31 10.0995 18.6C9.95945 18.75 9.75945 18.82 9.56945 18.82Z",
+                      fill: "white",
+                      fillOpacity: "0.88"
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "path",
+                    {
+                      d: "M20.4999 12.75H3.66992C3.25992 12.75 2.91992 12.41 2.91992 12C2.91992 11.59 3.25992 11.25 3.66992 11.25H20.4999C20.9099 11.25 21.2499 11.59 21.2499 12C21.2499 12.41 20.9099 12.75 20.4999 12.75Z",
+                      fill: "white",
+                      fillOpacity: "0.88"
+                    }
+                  )
+                ]
+              }
+            )
+          }
+        ),
+        props.children
+      ]
+    }
+  );
+}
 const borderRadius = {
   xl: 1.25,
   el: 1,
@@ -160,139 +370,6 @@ function CusComIcon({
   }
   return null;
 }
-function CusIconButton({
-  icon,
-  onClick,
-  size = "m",
-  type = "solid",
-  disabled,
-  style = {},
-  importantClassName,
-  originProps = {}
-}) {
-  const ref = reactExports.useRef(null);
-  const isHovering = useHover(ref);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Button,
-    {
-      ref,
-      style: {
-        padding: `${paddings[size]}rem`,
-        borderRadius: `${borderRadius[size]}rem`,
-        border: !!onClick ? "inherit" : "none",
-        borderColor: isHovering ? borderColorsOnHover[type] : borderColors[type],
-        background: backgrounds[type],
-        filter: !!disabled ? "brightness(0.6)" : "none",
-        height: "unset",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        ...style
-      },
-      className: importantClassName,
-      disabled,
-      onClick,
-      ...originProps,
-      children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        CusComIcon,
-        {
-          control: isHovering,
-          size,
-          animation: "rotate",
-          style: {
-            cursor: "pointer"
-          },
-          ...icon
-        }
-      )
-    }
-  );
-}
-function index_fixture$7() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Space, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltip, { title: "title", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CusIconButton, { icon: { src: testPng } }) }) }) });
-}
-const fixture0 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  default: index_fixture$7
-}, Symbol.toStringTag, { value: "Module" }));
-const fontSize = {
-  b1: 1,
-  b2: 0.875
-};
-const lineHeight = {
-  b1: 1.5,
-  b2: 1.375
-};
-const fontFamilys = {
-  regular: "Cus-Regular",
-  medium: "Cus-Medium",
-  semibold: "Cus-SemiBold",
-  bold: "Cus-Bold"
-};
-const fontWeights = {
-  regular: 400,
-  medium: 500,
-  semibold: 600,
-  bold: 700
-};
-function CusText({
-  children,
-  style = "b1",
-  outline = "regular"
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    "div",
-    {
-      style: {
-        fontSize: fontSize[style] + "rem",
-        lineHeight: lineHeight[style],
-        color: "#FFFFFFE0",
-        textOverflow: "ellipsis",
-        overflow: "hidden",
-        fontStyle: "normal",
-        fontFamily: fontFamilys[outline],
-        fontWeight: fontWeights[outline]
-      },
-      children
-    }
-  );
-}
-function index_fixture$6() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { direction: "vertical", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(CusText, { style: "b1", children: "style=b1" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(CusText, { style: "b2", children: "style=b2" })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(CusText, { outline: "regular", children: "outline=regular" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(CusText, { outline: "medium", children: "outline=medium" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(CusText, { outline: "semibold", children: "outline=semibold" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(CusText, { outline: "bold", children: "outline=bold" })
-    ] })
-  ] });
-}
-const fixture1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  default: index_fixture$6
-}, Symbol.toStringTag, { value: "Module" }));
-function CusModal(props) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Modal,
-    {
-      closable: false,
-      footer: null,
-      className: "com-cusmodal",
-      wrapClassName: "com-cusmodal-warp",
-      width: "36.75rem",
-      centered: true,
-      maskClosable: !props.loading,
-      open: props.open,
-      onCancel: props.onCancel,
-      ...props.originProps || {},
-      children: /* @__PURE__ */ jsxRuntimeExports.jsx(Spin, { spinning: props.loading || false, tip: props.loadingText, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "com-cusmodal-content", children: props.children }) })
-    }
-  );
-}
 function CusButton({
   children,
   size = "m",
@@ -326,7 +403,7 @@ function CusButton({
         lineHeight: `${lineHeights[size]}rem`,
         background: backgrounds[type],
         color: color[type],
-        filter: !!disabled ? "brightness(0.6)" : "none",
+        filter: disabled ? "brightness(0.6)" : "none",
         ...style
       },
       className: importantClassName,
@@ -358,43 +435,25 @@ function CusButton({
     }
   );
 }
-function index_fixture$5() {
+function CusModalFixture() {
   const [open, setOpen] = useBoolean(false);
-  const [loading, setLoading] = useBoolean(false);
-  reactExports.useEffect(() => {
-    if (loading) {
-      setTimeout(() => {
-        setLoading.setFalse();
-      }, 1e3);
-    }
-  }, [loading]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { onClick: setOpen.setTrue, children: "modal" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      CusModal,
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CusModal, { open, onCancel: setOpen.setFalse, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "div",
       {
-        open,
-        onCancel: () => {
-          setOpen.setFalse();
-          setLoading.setFalse();
+        style: {
+          padding: 32,
+          color: "#fff"
         },
-        loading,
-        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Space,
-          {
-            style: {
-              padding: "1rem"
-            },
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { onClick: setLoading.setTrue, children: "loading" })
-          }
-        )
+        children: "Modal Component"
       }
-    )
+    ) })
   ] });
 }
 const fixture2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index_fixture$5
+  default: CusModalFixture
 }, Symbol.toStringTag, { value: "Module" }));
 function CusMenu({
   options,
@@ -407,6 +466,7 @@ function CusMenu({
     ] }, index);
   }) });
 }
+const testPng = "" + new URL("test-BmZeV98H.png", import.meta.url).href;
 function index_fixture$4() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     "div",
@@ -745,6 +805,54 @@ const fixture5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProp
   __proto__: null,
   default: index_fixture$2
 }, Symbol.toStringTag, { value: "Module" }));
+function CusIconButton({
+  icon,
+  onClick,
+  size = "m",
+  type = "solid",
+  disabled,
+  style = {},
+  importantClassName,
+  originProps = {}
+}) {
+  const ref = reactExports.useRef(null);
+  const isHovering = useHover(ref);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    Button,
+    {
+      ref,
+      style: {
+        padding: `${paddings[size]}rem`,
+        borderRadius: `${borderRadius[size]}rem`,
+        border: !!onClick ? "inherit" : "none",
+        borderColor: isHovering ? borderColorsOnHover[type] : borderColors[type],
+        background: backgrounds[type],
+        filter: !!disabled ? "brightness(0.6)" : "none",
+        height: "unset",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        ...style
+      },
+      className: importantClassName,
+      disabled,
+      onClick,
+      ...originProps,
+      children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        CusComIcon,
+        {
+          control: isHovering,
+          size,
+          animation: "rotate",
+          style: {
+            cursor: "pointer"
+          },
+          ...icon
+        }
+      )
+    }
+  );
+}
 function index_fixture$1() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(CusIconButton, { icon: { src: testPng } });
 }
@@ -801,7 +909,7 @@ const rendererConfig = {
 };
 const fixtures = {
   "src/CusTooltip/index.fixture.tsx": { module: fixture0 },
-  "src/CusText/index.fixture.tsx": { module: fixture1 },
+  "src/CusTextButton/index.fixture.tsx": { module: fixture1 },
   "src/CusModal/index.fixture.tsx": { module: fixture2 },
   "src/CusMenu/index.fixture.tsx": { module: fixture3 },
   "src/CusListSelect/index.fixture.tsx": { module: fixture4 },

@@ -1,5 +1,5 @@
-const __vite__fileDeps=["./_virtual_cosmos-imports-DWufKys4.js","./vendors-hlgHDHLT.js","./_virtual_cosmos-imports-DbKXlXPP.css"],__vite__mapDeps=i=>i.map(i=>__vite__fileDeps[i]);
-import { m as mountDomRenderer } from "./vendors-hlgHDHLT.js";
+const __vite__fileDeps=["./_virtual_cosmos-imports-CiXSiVa6.js","./vendors-CdAMihPU.js","./_virtual_cosmos-imports-CaNWBzNd.css"],__vite__mapDeps=i=>i.map(i=>__vite__fileDeps[i]);
+import { m as mountDomRenderer } from "./vendors-CdAMihPU.js";
 (function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -100,6 +100,6 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
 };
 mount();
 async function mount() {
-  const args = await __vitePreload(() => import("./_virtual_cosmos-imports-DWufKys4.js"), true ? __vite__mapDeps([0,1,2]) : void 0, import.meta.url);
+  const args = await __vitePreload(() => import("./_virtual_cosmos-imports-CiXSiVa6.js"), true ? __vite__mapDeps([0,1,2]) : void 0, import.meta.url);
   mountDomRenderer(args);
 }
