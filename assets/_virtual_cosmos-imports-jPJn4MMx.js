@@ -745,62 +745,54 @@ function CusTextArea({
     }
   );
 }
-function index_fixture$2() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    "div",
-    {
-      style: {
-        padding: "1rem",
-        backgroundColor: "#ffffff1f"
-      },
-      children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { direction: "vertical", size: "large", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { size: "el", placeholder: "size=el" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { size: "l", placeholder: "size=l" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { size: "m", placeholder: "size=m" })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { state: "default", placeholder: "state=default" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { state: "success", placeholder: "state=success" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { state: "warning", placeholder: "state=warning" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { state: "error", placeholder: "state=error" })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            CusInput,
-            {
-              leftIcon: { src: testPng },
-              placeholder: "leftIcon"
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            CusInput,
-            {
-              rightIcon: { src: testPng },
-              placeholder: "rightIcon"
-            }
-          )
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Space, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { type: "email", placeholder: "type=email" }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Divider, {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { label: "label", placeholder: "label" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            CusInput,
-            {
-              feedback: "feedback",
-              state: "warning",
-              placeholder: "feedback"
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { tip: "tip", placeholder: "tip" })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Divider, {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Space, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CusTextArea, { placeholder: "textArea" }) })
-      ] })
-    }
-  );
-}
+const index_fixture$2 = /* @__PURE__ */ jsxRuntimeExports.jsx(
+  "div",
+  {
+    style: {
+      padding: "1rem",
+      backgroundColor: "#ffffff1f"
+    },
+    children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { direction: "vertical", size: "large", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { size: "el", placeholder: "size=el" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { size: "l", placeholder: "size=l" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { size: "m", placeholder: "size=m" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { state: "default", placeholder: "state=default" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { state: "success", placeholder: "state=success" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { state: "warning", placeholder: "state=warning" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { state: "error", placeholder: "state=error" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { leftIcon: { src: testPng }, placeholder: "leftIcon" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          CusInput,
+          {
+            rightIcon: { src: testPng },
+            placeholder: "rightIcon"
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Space, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { type: "email", placeholder: "type=email" }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Divider, {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { label: "label", placeholder: "label" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          CusInput,
+          {
+            feedback: "feedback",
+            state: "warning",
+            placeholder: "feedback"
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CusInput, { tip: "tip", placeholder: "tip" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Divider, {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Space, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CusTextArea, { placeholder: "textArea" }) })
+    ] })
+  }
+);
 const fixture5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: index_fixture$2
@@ -824,10 +816,10 @@ function CusIconButton({
       style: {
         padding: `${paddings[size]}rem`,
         borderRadius: `${borderRadius[size]}rem`,
-        border: !!onClick ? "inherit" : "none",
+        border: onClick ? "inherit" : "none",
         borderColor: isHovering ? borderColorsOnHover[type] : borderColors[type],
         background: backgrounds[type],
-        filter: !!disabled ? "brightness(0.6)" : "none",
+        filter: disabled ? "brightness(0.6)" : "none",
         height: "unset",
         display: "flex",
         justifyContent: "center",
@@ -860,45 +852,43 @@ const fixture6 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProp
   __proto__: null,
   default: index_fixture$1
 }, Symbol.toStringTag, { value: "Module" }));
-const index_fixture = () => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { direction: "vertical", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Row, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { size: "el", children: "size=el" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { size: "l", children: "size=l" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { size: "m", children: "size=m" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { size: "s", children: "size=s" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { size: "es", children: "size=es" })
-    ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Row, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { type: "solid", children: "type=solid" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { type: "outline", children: "type=outline" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { type: "text", children: "type=text" })
-    ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Row, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { disabled: true, children: "disabled" }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Row, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { block: true, children: "block" }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Row, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        CusButton,
-        {
-          leftIcon: {
-            src: testPng
-          },
-          children: "leftIcon"
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        CusButton,
-        {
-          leftIcon: {
-            src: testPng,
-            animation: "width"
-          },
-          children: "HoverAnimation"
-        }
-      )
-    ] }) })
-  ] });
-};
+const index_fixture = /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { direction: "vertical", children: [
+  /* @__PURE__ */ jsxRuntimeExports.jsx(Row, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { size: "el", children: "size=el" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { size: "l", children: "size=l" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { size: "m", children: "size=m" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { size: "s", children: "size=s" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { size: "es", children: "size=es" })
+  ] }) }),
+  /* @__PURE__ */ jsxRuntimeExports.jsx(Row, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { type: "solid", children: "type=solid" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { type: "outline", children: "type=outline" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { type: "text", children: "type=text" })
+  ] }) }),
+  /* @__PURE__ */ jsxRuntimeExports.jsx(Row, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { disabled: true, children: "disabled" }) }),
+  /* @__PURE__ */ jsxRuntimeExports.jsx(Row, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CusButton, { block: true, children: "block" }) }),
+  /* @__PURE__ */ jsxRuntimeExports.jsx(Row, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Space, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      CusButton,
+      {
+        leftIcon: {
+          src: testPng
+        },
+        children: "leftIcon"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      CusButton,
+      {
+        leftIcon: {
+          src: testPng,
+          animation: "width"
+        },
+        children: "HoverAnimation"
+      }
+    )
+  ] }) })
+] });
 const fixture7 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: index_fixture
