@@ -1,4 +1,5 @@
 import CusButton from "./CusButton";
+import CusIconButton from "./CusButton/CusIconButton";
 import * as CusIcon from "./CusIcon";
 import CusInput from "./CusInput";
 import CusListSelect from "./CusListSelect";
@@ -9,6 +10,7 @@ import CusTooltip from "./CusTooltip";
 
 export {
     CusButton,
+    CusIconButton,
     CusIcon,
     CusInput,
     CusListSelect,

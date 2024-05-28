@@ -34,12 +34,12 @@ export default function CusIconButton({
             style={{
                 padding: `${paddings[size]}rem`,
                 borderRadius: `${borderRadius[size]}rem`,
-                border: !!onClick ? "inherit" : "none",
+                border: onClick ? "inherit" : "none",
                 borderColor: isHovering
                     ? borderColorsOnHover[type]
                     : borderColors[type],
                 background: backgrounds[type],
-                filter: !!disabled ? "brightness(0.6)" : "none",
+                filter: disabled ? "brightness(0.6)" : "none",
                 height: "unset",
                 display: "flex",
                 justifyContent: "center",
